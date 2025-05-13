@@ -338,6 +338,8 @@ class DashboardController extends Controller
 
 ## Paso 15. Crear una ruta para la administración del sitio.
 
+Nota. La ruta debe crearse en `routes\web.php` 
+
 ```php
 Route::get('admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 ```
@@ -358,9 +360,11 @@ php artisan serve
 ```
 
 visitar `http://localhost:8000`  
+
 ![image](./img/localhost_test.png)  
 
 visitar `http://localhost:8000/admin/dashboard`  
+
 
 ![image](./img/localhost_admin_dashboard.png)  
 
@@ -423,6 +427,35 @@ Hay que agregar nuevamente la ruta en `routes\web.php` pero suguiero que se agre
 Route::get('admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
     ->middleware('auth')
     ->name('admin.dashboard');
+```
+
+El archivo de rutas finalmente quedará así:  
+
+```php
+<?php
+
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::get('admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('admin.dashboard');
+
+require __DIR__.'/auth.php';
 ```
 
 ![image](./img/admin_dashboard_logeado.png)  
