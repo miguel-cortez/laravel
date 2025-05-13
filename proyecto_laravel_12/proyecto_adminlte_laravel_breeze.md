@@ -226,7 +226,7 @@ class DashboardController extends Controller
 Route::get('admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 ```
 
-Si se quiere proteger la ruta.
+Si se quiere proteger la ruta (esto es lo recomendado porque al panel administrativo no debería entrar personas no autenticadas). 
 
 ```
 Route::get('admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
@@ -245,32 +245,32 @@ vistiar `http://localhost:8000/admin/dashboard`
 
 # LARAVEL/BREEZE
 
-## Paso 17.
+## Paso 17. Congigure el paquete laravel/breeze
 
 `composer require laravel/breeze`
 
-## Paso 18.
+## Paso 18. Instale el paquete.
 
 ```
 php artisan breeze:install
 ```
 
-Nota. Para pruebas unitarias yo elegí PHPUnit.
+Nota. Durante el asistente de instalación pregunta qué herramienta utilizará para hacer pruebas. Yo seleccioné `PHPUnit` quizá no lo utilicemos.  
 
-## Paso 19.
+## Paso 19. Ejecutar comandos.
 
 ```
 npm install (yo ya lo había ejecutado)
 npm run dev
 ```
 
-## Paso 20. Ejeuctar migraciones
+## Paso 20. Ejecutar las migraciones
 
 ```
 php artisan migrate
 ```
 
-Nota. En mi caso, no encontró nada nuevo que migrar.
+Nota. En mi caso, cuando ejecuté las migraciones en este punto no encontró nada que migrar.  
 
 ## Paso 21. Probar la aplicación.
 
@@ -278,7 +278,13 @@ Nota. En mi caso, no encontró nada nuevo que migrar.
 php artisan serve
 ```
 
-Nota. Ya se integró Laravel/Breeze; pero con este proceso se borró la ruta que añadí manualmente para el dashboard y tuve necesidad de agregar nuevamente para poder acceder al dashboard administrativo. Me refiero a la ruta del paso 15.
+Nota. Ya se integró Laravel/Breeze; pero con este proceso se borró la ruta que añadí manualmente para el dashboard y tuve necesidad de agregar nuevamente para poder acceder al dashboard administrativo.
+
+Me refiero a esta ruta que fue creada en el paso 15.
+
+```
+Route::get('admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+```
 
 REFERENCIAS
 
