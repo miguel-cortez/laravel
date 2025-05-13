@@ -357,10 +357,10 @@ npm run dev
 php artisan serve
 ```
 
-visitar `http://localhost:8000`
+visitar `http://localhost:8000`  
 ![image](./img/localhost_test.png)  
 
-visitar `http://localhost:8000/admin/dashboard`
+visitar `http://localhost:8000/admin/dashboard`  
 
 ![image](./img/localhost_admin_dashboard.png)  
 
