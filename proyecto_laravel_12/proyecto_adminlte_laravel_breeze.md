@@ -357,13 +357,23 @@ npm run dev
 php artisan serve
 ```
 
-vistiar `http://localhost:8000/admin/dashboard`
+visitar `http://localhost:8000`
+![image](./img/localhost_test.png)  
+
+visitar `http://localhost:8000/admin/dashboard`
+
+![image](./img/localhost_admin_dashboard.png)  
+
 
 # LARAVEL/BREEZE
+
+Laravel/Breeze permite gestionar la creación de cuentas de usuario, el acceso y las configuraciones del perfil de usuario.  
 
 ## Paso 17. Configure el paquete laravel/breeze
 
 `composer require laravel/breeze`
+
+![image](./img/require_laravel_breeze.png)  
 
 ## Paso 18. Instale el paquete.
 
@@ -371,14 +381,18 @@ vistiar `http://localhost:8000/admin/dashboard`
 php artisan breeze:install
 ```
 
+![image](./img/breeze_install.png)  
+
 Nota. Durante el asistente de instalación pregunta qué herramienta utilizará para hacer pruebas. Yo seleccioné `PHPUnit` quizá no lo utilicemos.  
 
 ## Paso 19. Ejecutar comandos.
 
 ```
-npm install (yo ya lo había ejecutado)
+npm install
 npm run dev
 ```
+
+Nota. Recuerde que **npm install** instala las dependencias necesarias.  
 
 ## Paso 20. Ejecutar las migraciones
 
@@ -386,13 +400,14 @@ npm run dev
 php artisan migrate
 ```
 
-Nota. En mi caso, cuando ejecuté las migraciones en este punto no encontró nada que migrar.  
+Nota. En mi caso, cuando ejecuté las migraciones en este punto no encontró nada que migrar.  Mensaje ` INFO  Nothing to migrate.` 
 
 ## Paso 21. Probar la aplicación.
 
 ```
 php artisan serve
 ```
+![image](./img/laravel_breeze_listo.png)  
 
 Nota. Ya se integró Laravel/Breeze; pero con este proceso se borró la ruta que añadí manualmente para el dashboard y tuve necesidad de agregar nuevamente para poder acceder al dashboard administrativo.
 
@@ -402,7 +417,17 @@ Me refiero a esta ruta que fue creada en el paso 15.
 Route::get('admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 ```
 
-REFERENCIAS
+Hay que agregar nuevamente la ruta en `routes\web.php` pero suguiero que se agregue la ruta protegida con `middleware` 
+
+```php
+Route::get('admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('admin.dashboard');
+```
+
+![image](./img/admin_dashboard_logeado.png)  
+
+**REFERENCIAS**
 
 ## Instalar laravel/breeze
 
