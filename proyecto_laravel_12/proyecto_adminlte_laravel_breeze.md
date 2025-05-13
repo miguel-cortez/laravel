@@ -1,4 +1,10 @@
-# Crear un nuevo proyecto en Laravel 12
+# CREAR UN PROYECTO EN LARAVEL 12
+- MySQL
+- PHP
+- Composer
+- NodeJS & npm
+- AdminLTE.
+- Laravel/Breeze
 
 ## Requisitos
 
@@ -114,18 +120,19 @@ Ahora que ya indicó qué gestor de base de datos utilizará y el nombre de la b
 
 Como la base de datos aún no existe, le hará la siguiente pregunta (responda yes): 
 
-<p style="color:orange;">
+```
 WARN  The database 'example_app' does not exist on the 'mysql' connection.
 Would you like to create it? (yes/no) [yes]
-</p>
+```
 
-:collision: Yo tuve problemas a la hora de ejecutar las migraciones.
+
+:collision: Yo tuve problemas a la hora de ejecutar las migraciones. Las siguientes imágenes muestran una evidencia de ello.  
 
 ![image](./img/sqlstate_42000.png)  
 
 ![image](./img/sqlstate_42501.png)  
 
-Al parecer, los errores se deben a la longitud predeterminada de las cadenas en el proyecto de Laravel.
+Al parecer, los errores se deben a la longitud predeterminada de las cadenas en el proyecto de Laravel 12.  
 
 **SOLUCIÓN**
 
@@ -142,6 +149,7 @@ Al parecer, los errores se deben a la longitud predeterminada de las cadenas en 
     ![image](./img/sqlstate_42501_migrate.png)  
 
 **:eyes: COMENTARIOS (lectura opcional)**
+---
 A pesar de la solución expuesta, al ejecutar el procedimiento en otra computadora encontré lo siguiente:
 
 - La computadora tiene instaladas varias versiones de MySQL.
@@ -164,11 +172,11 @@ A pesar de la solución expuesta, al ejecutar el procedimiento en otra computado
     ![image](./img/path_nivel_sistema.png)  
 
     NOTA. Lo ideal sería utilizar una misma versión de MySQL.  Además, basta con tener la ruta de MySQL a nivel de usuario o a nivel de sistema; pero mi configuración está tal cual lo expliqué.  
-
+---
 
 ## Paso 8. Descargar e instalar NodeJS
 
-**¿Por qué es necesario ejecutar los siguientes comandos?**
+**¿Por qué es necesario ejecutar los siguientes comandos?**   
 Obserque en la siguiente imagen. No se puede ejecutar npm run dev.  
 ![image](./img/vite_no_se_reconoce.png)
 
@@ -353,7 +361,7 @@ vistiar `http://localhost:8000/admin/dashboard`
 
 # LARAVEL/BREEZE
 
-## Paso 17. Congigure el paquete laravel/breeze
+## Paso 17. Configure el paquete laravel/breeze
 
 `composer require laravel/breeze`
 
