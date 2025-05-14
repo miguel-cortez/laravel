@@ -630,6 +630,51 @@ Contenido original:
 </html>
 ```
 
+Contenido modificado:  
+
+```php
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/appVue.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
+
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
+
+            <!-- Page Content -->
+            <main>
+                 <div id="app"></div>
+            </main>
+        </div>
+    </body>
+</html>
+```
+:green_book: Se ha modificado la línea `@vite(['resources/css/app.css', 'resources/js/app.js'])` por  `@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/appVue.js'])`. Se borró `{{ $slot }}` y en su lugar se ecribió `<div id="app"></div>`  
+
+Le sugiero que analice que hace `{{ $slot }}`. Puede hacerlo ejecutando la aplicación con esta instrucción y luego sin ella. Note la diferencia en la aplicación web (en el navegador web).  
+
+
 ## Paso 30. Ejecutar la aplicación
 
 ```
