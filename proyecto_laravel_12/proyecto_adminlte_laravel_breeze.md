@@ -460,6 +460,176 @@ require __DIR__.'/auth.php';
 
 ![image](./img/admin_dashboard_logeado.png)  
 
+# CONFIGURAR VUE Y VUE-ROUTER
+
+## Paso 22. Instalar vue y las dependencias adicionales.
+
+```
+npm install vue@latest vue-router@latest @vitejs/plugin-vue
+```
+
+![image](./img/install_vue_and_dependencies.png)  
+## Paso 23. Configurar vite para que funcione con vue.
+Las configuraciones se realizarán en `vite.config.js` 
+
+Configuraciones originales:  
+
+```javascript
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
+            refresh: true,
+        }),
+    ],
+});
+```
+Configuraciones modificadas:  
+
+```javascript
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import laravel from 'laravel-vite-plugin';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            refresh: true,
+        }),
+        vue(),
+    ],
+});
+```
+
+Nota. Se agregaron las líneas `import vue from '@vitejs/plugin-vue';` y `vue(),`  
+
+## Paso 24. Crear un punto de entrada para la aplicación Vue.
+
+Nota. Es común crear en este punto un archivo llamado `app.js` con las configuraciones de la aplicación `vue`; pero en mi caso, ya tengo un archivo con ese nombre, creado por Laravel/Breeze si no me equivoco. Entonces, vamos a crear otro archivo con el nombre `appVue.js`  
+
+El archivo será creado en :file_folder: ` resources\js`
+
+El contenido del archivo será el siguiente:  
+
+```javascript
+import { createApp } from 'vue';
+import App from './components/AppComponent.vue';
+import router from './router';
+
+createApp(App).use(router).mount('#app');
+```
+
+Espero no confundir entre el archivo `appVue.js` que va a tener las configuaciones de la aplicación `vue` con el archivo `AppComponent.vue` que representa a un componente que será creado. **AppComponent.vue** es por decir algo, como la página principal de la aplicación Vue; pero perfectamente puede tener otro nombre. Similar a este componente vamos a crear otros como **ProductoComponent.vue**, **VentaComponent.vue**, etc. Donde usar la palabra **Component** al final del nombre solo es una convención.  
+
+## Paso 25. Crear un componente de vue
+
+Antes de crear el primer componente, vamos a crear una carpeta llamada `components` en el directorio `resources\js` 
+
+Después de creada la carpeta, agregue un nuevo archivo llamado `App.vue` dentro del directorio `resources\js\components`  
+
+El contenido del archivo `AppComponent.vue` será el siguiente: 
+
+```javascript
+<template>
+    <div>
+        <h1>Bienvenido a Laravel 12 y Vue 3</h1>
+    </div>
+</template>
+```
+
+## Paso 26. Instalar vue-router
+
+```
+npm install vue-router@latest
+```
+![image](./img/install_vue_router.png)  
+## Paso 27. Configurar las rutas en vue-router.
+
+Crear el archivo `resources/js/router/index.js` para definir las rutas de vue-router.
+En este archivo se deben definir todas las rutas que será gestionadas por vue-router, a continuación se presenta el archivo con una sola ruta creada. La ruta creada es para acceder al componente Home.vue y se ha definido como la ruta raíz `/`
+
+Nota. El componente `HomeComponent.vue` es un componente más como `AppComponent.vue` y debe ser creado por nosotros para que funciones.  
+
+```javascript
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../components/HomeComponent.vue';
+
+const routes = [
+    { path: '/', component: Home }
+];
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+});
+
+export default router;
+```
+
+## Paso 28. Cree el archivo HomeComponent.vue
+
+Este archivo debe ser creado en :file_folder: `resources/js/components`. El nombre del archivo será `HomeComponent.vue`.  
+
+Este podría ser el contenido del archivo:  
+
+```php
+<template>
+    <div>
+        <h2>Página de inicio de example-app</h2>
+    </div>
+</template>
+```
+## Paso 29. Actualizar la plantilla de Blade
+
+Se actualizará la plantilla de Blade para que ejecute la aplicación de vue y se definirá una área para el despliegue de los componentes.  
+
+La actualización se hará en el archivo `resources/views/layouts/app.blade.php` 
+
+Contenido original: 
+
+```php
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
+
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
+
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+    </body>
+</html>
+```
+
 **REFERENCIAS**
 
 ## Instalar laravel/breeze
