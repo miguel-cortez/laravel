@@ -672,7 +672,7 @@ Contenido modificado:
 ```
 :green_book: Se ha modificado la línea `@vite(['resources/css/app.css', 'resources/js/app.js'])` por  `@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/appVue.js'])`. Se borró `{{ $slot }}` y en su lugar se ecribió `<div id="app"></div>`  
 
-Le sugiero que analice que hace `{{ $slot }}`. Puede hacerlo ejecutando la aplicación con esta instrucción y luego sin ella. Note la diferencia en la aplicación web (en el navegador web).  
+Le sugiero que analice qué hace `{{ $slot }}`. Puede hacerlo ejecutando la aplicación con esta instrucción y luego sin ella. Note la diferencia en la aplicación web (en el navegador web).  
 
 
 ## Paso 30. Ejecutar la aplicación
@@ -690,20 +690,15 @@ Así se verá el componente de vue ya cargado (AppComponent.vue):
 
 ![image](./img/app_component_vue.png)  
 
-**REFERENCIAS**
+:zap: Nota adicional. En Laravel 12 se deben habilitar las rutas api en caso que sea necesario. Esto se hace con el comando `php artisan install:api`  
+
+# Referencias
 
 ## Instalar laravel/breeze
 
 Referencia inicial: https://codecourse.com/articles/how-to-install-laravel-breeze-on-laravel-12
 
 Referencia más detalles: https://kritimyantra.com/blogs/install-laravel-breeze-package-in-laravel-12
-
-```
-composer require laravel/breeze --dev
-php artisan breeze:install
-```
-
-A la pregunta **Which Breeze stack would you like to install?**, responder con la opción **Blade with Alpine**
 
 ## Vue3 en Laravel 12
 
@@ -716,9 +711,3 @@ https://kritimyantra.com/blogs/laravel-12-adminlte-integration-setup-your-stunni
 ## Original
 
 https://jeroennoten.github.io/Laravel-AdminLTE/
-
-## Habilitar las rutas API
-
-```
-php artisan install:api
-```
