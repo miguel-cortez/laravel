@@ -630,6 +630,21 @@ Contenido original:
 </html>
 ```
 
+## Paso 30. Ejecutar la aplicación
+
+```
+npm run dev
+```
+```
+php artisan serve
+```
+
+Acceder a la URL `http://localhost:8000` y autenticarse.
+
+Así se verá el componente de vue ya cargado (AppComponent.vue):  
+
+![image](./img/app_component_vue.png)  
+
 **REFERENCIAS**
 
 ## Instalar laravel/breeze
