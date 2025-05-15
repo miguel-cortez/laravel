@@ -690,6 +690,51 @@ Así se verá el componente de vue ya cargado (AppComponent.vue):
 
 ![image](./img/app_component_vue.png)  
 
+## Paso 31. Instalar PrimeVue
+```
+npm install primevue @primeuix/themes
+npm install primevue primeicons
+```
+
+Instalar sweetalert2 (OPCIONAL):  
+```
+npm install -S vue-sweetalert2
+```
+
+Modificar appVue.js
+
+```
+import { createApp } from 'vue';
+import App from './components/AppComponent.vue';
+import router from './router';
+import Swal from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+import PrimeVue from 'primevue/config';
+import Aura from '@primeuix/themes/aura';
+import Button from "primevue/button"
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
+import 'primeicons/primeicons.css';
+import DatePicker from 'primevue/datepicker';
+
+const app = createApp(App);
+app.config.globalProperties.axios = axios;
+app.use(router);
+app.use(Swal);
+app.use(PrimeVue, {
+    theme: {
+        preset: Aura
+    }
+});
+app.use(ToastService);
+
+app.component('Button', Button);
+app.component('Toast', Toast);
+app.component('DatePicker', DatePicker);
+
+app.mount('#app');
+```
+
 :zap: Nota adicional. En Laravel 12 se deben habilitar las rutas api en caso que sea necesario. Esto se hace con el comando `php artisan install:api`  
 
 # Referencias
