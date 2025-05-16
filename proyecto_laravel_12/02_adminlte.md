@@ -74,7 +74,11 @@ Acceda a `http://localhost:8000`  y vea el resultado de AdminLTE.
 
 ![image](./img/localhost_test_adminlte.png)  
 
-:zap: Ahora que ya probó la plantilla AdminLTE puede borrar el archivo `welcome.blade.php` y después de borrado puede renombrar `welcome.blade copy.php` con el nombre que tenía originalmente. Es decir, `welcome.blade.php`.  
+:orange_book: Ahora que ya probó la plantilla AdminLTE, sustituya el contenido de `welcome.blade.php` por el contenido que tenía originalmente. El contenido original lo puede encontrar en `welcome.blade copy.php`. Luego, :x: borre la copia.  
+
+**¿Por qué dejamos el archivo como estaba inicialmente?**
+
+Esto lo hicimos solamente para probar que la plantilla AdminLTE está funcionando; pero la plantilla será aplicada en el **Dashboard** que se creará más adelante.  
 
 ## Paso 12. Agregar una opción en el menú.
 
