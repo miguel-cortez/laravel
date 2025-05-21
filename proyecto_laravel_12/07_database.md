@@ -6,14 +6,6 @@
 
 :pushpin: Es importante seguir un formato estándar a la hora de nombrar la migración para que se cree de forma conveniente. Me refiero a usar nombres como `createCategoriasTable` y `createProductosTable`. Creo que también se pueden usar nombres como `create_categorias_table`  y  `create_productos_table`.  
 
-```
-php artisan make:migration createCategoriasTable
-```
-
-```
-php artisan make:migration createProductosTable
-```
-
 ## Definir las migraciones.
 
 Nota. Se pretende mostrar cómo crear tablas relacionadas.  
@@ -56,7 +48,13 @@ Schema::table('posts', function (Blueprint $table) {
 ```
 
 ## Definir la migración para la tabla categorias (tabla padre)
-`database\migrations\2025_05_18_113438_create_categorias_table.php`  
+
+**Comando:**  
+```
+php artisan make:migration createCategoriasTable
+```
+
+Archivo creado: `database\migrations\2025_05_18_113438_create_categorias_table.php`  
 
 ```php
 <?php
@@ -93,7 +91,12 @@ return new class extends Migration
 
 :books: Se ha utilizado la segunda forma explicada arriba.  
 
-`database\migrations\2025_05_18_142457_create_productos_table.php`  
+**Comando:**  
+```
+php artisan make:migration createProductosTable
+```
+
+Archivo creado:  `database\migrations\2025_05_18_142457_create_productos_table.php`  
 
 ```php
 <?php
@@ -135,8 +138,7 @@ return new class extends Migration
 
 ![imagen](./img/productos_myisam.png)  
 
-Observe la línea siguiente:  
-**CONSTRAINT `productos_categoria_id` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`)**  
+Observe las líneas resaltadas con un borde de color amarillo.   
 
 ```php
 <?php
@@ -229,8 +231,7 @@ return [
 ];
 ```
 
-Observe la línea siguiente:  
-**CONSTRAINT `productos_categoria_id` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`)**  
+Observe las líneas resaltadas con un borde de color amarillo.   
 
 :warning: Ahora la configuración se ha cambiado de `null` a `InnoDB` en `'engine' => null,`. 
 
