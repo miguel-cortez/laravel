@@ -2,10 +2,57 @@
 
 :books: Las migraciones predeterminadas del proyecto de Laravel ya fueron ejecutadas con el comando `php artisan migrate`.  
 
-## Comentarios acerca de las migraciones.  
+## Crear las migraciones
 
-### Ejemplos de migraciones
+:pushpin: Es importante seguir un formato estándar a la hora de nombrar la migración para que se cree de forma conveniente. Me refiero a usar nombres como `createCategoriasTable` y `createProductosTable`. Creo que también se pueden usar nombres como `create_categorias_table`  y  `create_productos_table`.  
 
+```
+php artisan make:migration createCategoriasTable
+```
+
+```
+php artisan make:migration createProductosTable
+```
+
+## Definir las migraciones.
+
+Nota. Se pretende mostrar cómo crear tablas relacionadas.  
+
+#### Forma 1:
+
+:pushpin: Esta forma necesita que se cree el campo y luego se defina la llave foránea.  
+
+```php
+Schema::table('posts', function (Blueprint $table) {
+    $table->unsignedBigInteger('user_id');
+    $table->foreign('user_id')->references('id')->on('users');
+});
+```
+#### Forma 2:  
+:pushpin: Esta forma define automáticamente el campo de la llave foránea y la relación entre las tablas.  
+
+##### Forma 2.a:  
+
+```php
+Schema::table('posts', function (Blueprint $table) {
+    $table->foreignId('user_id')->constrained();
+});
+```
+
+Con este formato crea automáticamente el campo para la relación en la tabla hija y además, hace la referencia automáticamente con la tabla padre. Se basa en la idea de que los nombres de tablas y campos siguen un mismo estándar. Por ejemplo, como en `foreingId` se está usando el campo `user_id`, Laravel ya sabe que debe relacionarse con una tabla llamada `users` (en plural). Desventaja para nosotros que hablamos español "Los nombres los pluraliza basados en el inglés, no en español". Si bien recuerdo que se puede pluralizar en español, pero es necesario hacer algunas otras configuraciones.
+
+:star: Por suerte, tenemos otra alternativa que he documentado como `Forma 2.b` por cuestiones de refencia.  
+
+##### Forma 2.b:  
+```php
+Schema::table('posts', function (Blueprint $table) {
+    $table->foreignId('user_id')->constrained(
+        table: 'users', indexName: 'posts_user_id'
+    );
+});
+```
+
+## Definir la migración para la tabla categorias (tabla padre)
 `database\migrations\2025_05_18_113438_create_categorias_table.php`  
 
 ```php
@@ -38,6 +85,10 @@ return new class extends Migration
     }
 };
 ```  
+
+## Definir la migración para la tabla productos (tabla hija)
+
+:books: Se ha utilizado la segunda forma explicada arriba.  
 
 `database\migrations\2025_05_18_142457_create_productos_table.php`  
 
@@ -77,11 +128,12 @@ return new class extends Migration
 };
 ```  
 
-:books: A pesar de la relación entre las tablas `cateogorias` y `productos`, cuando se ejecutan las migraciones, la definición de las tablas no tienen la restricción. Por lo tanto, se puede ingresar un producto aún cuando `categoria_id` no tenga un valor equivalente en la tabla de `categorias`. La razón es que por defecto, el proyecto de Laravel no tiene definido en `engine` o motor de bases de datos.  
+:books: A pesar de la relación entre las tablas `cateogorias` y `productos`, cuando se ejecutan las migraciones, la definición de las tablas no tienen la restricción. Por lo tanto, se puede ingresar un producto aún cuando `categoria_id` no tenga un valor equivalente en la tabla de `categorias`. La razón es que por defecto, el proyecto de Laravel no tiene definido el motor de almacenamiento de las bases de datos `engine`.  
 
 ![imagen](./img/productos_myisam.png)  
 
-## 
+Observe la línea siguiente:  
+**CONSTRAINT `productos_categoria_id` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`)**  
 
 ```php
 <?php
@@ -174,6 +226,9 @@ return [
 ];
 ```
 
+Observe la línea siguiente:  
+**CONSTRAINT `productos_categoria_id` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`)**  
+
 :warning: Ahora la configuración se ha cambiado de `null` a `InnoDB` en `'engine' => null,`. 
 
 ## Ejecutar las migraciones.
@@ -182,5 +237,3 @@ Si ahora ejecuta las migraciones, ya tendrá las restricciones entre las tablas 
 
 ![image](./img/productos_innodb.png)  
 
-Observe la línea siguiente:  
-**CONSTRAINT `productos_categoria_id` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`)**  
