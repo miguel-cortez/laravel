@@ -49,12 +49,12 @@ Schema::table('posts', function (Blueprint $table) {
 
 ## Definir la migración para la tabla categorias (tabla padre)
 
-**Comando:**  
-```
-php artisan make:migration createCategoriasTable
-```
+Comando: `php artisan make:migration createCategoriasTable
+`
 
 Archivo creado: `database\migrations\2025_05_18_113438_create_categorias_table.php`  
+
+El contenido de `public function up(): void{...}` ha sido digitado para definir la estructura que tendrá la tabla `categorias`  
 
 ```php
 <?php
@@ -91,12 +91,11 @@ return new class extends Migration
 
 :books: Se ha utilizado la segunda forma explicada arriba.  
 
-**Comando:**  
-```
-php artisan make:migration createProductosTable
-```
+Comando: `php artisan make:migration createProductosTable`  
 
 Archivo creado:  `database\migrations\2025_05_18_142457_create_productos_table.php`  
+
+El contenido de `public function up(): void{...}` ha sido digitado para definir la estructura que tendrá la tabla `productos`  
 
 ```php
 <?php
@@ -138,7 +137,7 @@ return new class extends Migration
 
 ![imagen](./img/productos_myisam.png)  
 
-Observe las líneas resaltadas con un borde de color amarillo.   
+Observe las líneas resaltadas con un borde de color amarillo. No existe la relación con la tabla `categorias` y se está utilizando el motor de almacenamiento `MyISAM`      
 
 ```php
 <?php
@@ -241,3 +240,4 @@ Si ahora ejecuta las migraciones, ya tendrá las restricciones entre las tablas 
 
 ![image](./img/productos_innodb.png)  
 
+Observe las líneas resaltadas con un borde de color amarillo. Ahora sí existe la relación con la tabla `categorias` y se está utilizando el motor de almacenamiento `InnoDB`    
