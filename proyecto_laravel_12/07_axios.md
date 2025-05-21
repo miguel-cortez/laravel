@@ -17,9 +17,9 @@ window.axios = axios;
 app.mount('#app');
 ```
 ### Notas
-* `app.config.globalProperties.$axios = axios;` crea una propiedad global llamada `$axios` para ser utilizada en entorno de Vue. Se utiliza cuando en los componentes trabajamos con **Options API** y se utilizará de esta manera `this.$axios.get(...)...`  
-* **window.axios = axios;** Crea una propiedad para ser utilizada en entornos diferentes de Vue. En la práctica estamos utilizando `axios`, la variable definida en `window.axios`.
-* Pero he probado y no se necesita ninguna de estas configuraciones en el proyecto porque el proyecto ya está utilizando `bootstrap` este incluye una configuración para usar `axios`.  
+* `app.config.globalProperties.$axios = axios;` crea una propiedad global llamada `$axios` para ser utilizada en componentes de `Vue`. Se utiliza cuando en los componentes trabajamos con **Options API** y se utilizará de esta manera `this.$axios.get(...)...`  
+* **window.axios = axios;** Crea una propiedad para ser utilizada inclusive en entornos diferentes de `Vue`.  
+* Pero he probado y no se necesita ninguna de estas configuraciones debido a que el proyecto ya está utilizando `bootstrap` y éste incluye una configuración para usar `axios`. Bueno, sí será necesaria la configuración si va a utilizar `Options API` porque la configuración de `bootstrap` no la incluye.    
 
 El archivo de configuración de bootstrap es el siguiente:  
 
@@ -38,7 +38,7 @@ Entonces, en `appVue.js` podría NO incluir instrucciones para utilizar `axios`.
 **resources\js\components\ProductoComponent.vue**  
 
 ### CASO 1  
-:pushpin: Nota. Este ejemplo es con **Options API** y una función normal para ejecutar para ejecutar la petición con `this.$axios`. Cuando se utiliza una `función normal` no se puede acceder a `this` dentro de la aplicación de `axios`.  Por esta razón fue necesario crear una variable `me` para guardar la referencia a `this` y poder acceder a las variables definidas en `data()`.   
+:books: Nota. Este ejemplo es con **Options API** y una función normal para ejecutar para ejecutar la petición con `this.$axios`. Cuando se utiliza una `función normal` no se puede acceder a `this` dentro de la aplicación de `axios`.  Por esta razón fue necesario crear una variable `me` para guardar la referencia a `this` y poder acceder a las variables definidas en `data()`.   
 
 ```javascript
 <template>
@@ -83,9 +83,10 @@ export default {
 };
 </script>
 ```
+:warning: Complicaciones a la hora de probar esta opción. No se puede acceder a `products` dentro de `this.$axios.get("/api/dashboard/productos").then(function (response){ AQUÍ }` porque estamos fuera del ábmito de donde se conoce `this` y es necesario crear una variable, que en mi caso se llama `me` pero el nombre puede ser cualquier otro nombre de variable válido. A la variable se le asigna el valor `this` y con esto podemos utilizar la `varariable` en sustituto de `this` 
 
 ### CASO 2  
-:pushpin: Nota. Este ejemplo es con **Options API** y una `función flecha` para ejecutar para ejecutar la petición con `this.$axios`. Cuando se utiliza una `función flecha` se puede acceder a `this` dentro de la petición de `axios`.   
+:books: Nota. Este ejemplo es con **Options API** y una `función flecha` para ejecutar para ejecutar la petición con `this.$axios`. Cuando se utiliza una `función flecha` se puede acceder a `this` dentro de la petición de `axios`.   
 
 ```javascript
 <template>
@@ -130,8 +131,10 @@ export default {
 </script>
 ```
 
+:warning: Utilizando una `función flecha` no hay problema para acceder a `this`.
+
 ### CASO 3  
-:pushpin: Nota. Este ejemplo es con **Composition API** para ejecutar la petición con `axios`.  
+:books: Nota. Este ejemplo es con **Composition API** para ejecutar la petición con `axios`. En este caso es necesario agregar `setup` en `<script setup>`    
 
 ```javascript
 <template>
