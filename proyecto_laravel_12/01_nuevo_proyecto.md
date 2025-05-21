@@ -146,6 +146,8 @@ Al parecer, los errores se deben a la longitud predeterminada de las cadenas en 
 
     ![image](./img/sqlstate_42501_migrate.png)  
 
+En otra ocasión le asigné el valor 125(por comentario de un estudiante) y también me funcionó, entonces, no necesariamente debe tener el valor 191. En Internet se encuentra normalmente el valor 191 y pienso que está relacionado con la máxima longitud de los campos de las tablas (:pushpin: no comprobado).  
+
 **:eyes: COMENTARIOS (lectura opcional)**
 ---
 A pesar de la solución expuesta, al ejecutar el procedimiento en otra computadora encontré lo siguiente:
