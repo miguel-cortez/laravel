@@ -29,7 +29,6 @@ Schema::table('posts', function (Blueprint $table) {
 });
 ```
 #### Forma 2:  
-:pushpin: Esta forma define automáticamente el campo de la llave foránea y la relación entre las tablas.  
 
 ##### Forma 2.a:  
 
@@ -39,9 +38,13 @@ Schema::table('posts', function (Blueprint $table) {
 });
 ```
 
-Con este formato crea automáticamente el campo para la relación en la tabla hija y además, hace la referencia automáticamente con la tabla padre. Se basa en la idea de que los nombres de tablas y campos siguen un mismo estándar. Por ejemplo, como en `foreingId` se está usando el campo `user_id`, Laravel ya sabe que debe relacionarse con una tabla llamada `users` (en plural). Desventaja para nosotros que hablamos español "Los nombres los pluraliza basados en el inglés, no en español". Si bien recuerdo que se puede pluralizar en español, pero es necesario hacer algunas otras configuraciones.
+* Con esta sintaxis se crea automáticamente un campo en la tabla hija que servirá para relacionar ambas tablas.
+* También se crea un índice basado en el campo que creó y la la restricción entre ambas tablas (references...)   
+* Se basa en la idea de que los nombres de las tablas y los nombres de los campos siguen un estándar en su escritura. Por ejemplo, en `$table->foreignId('user_id')->constrained();` se está usando el campo `user_id`. Laravel ya sabe que debe crear una relación con la tabla llamada `users` (en plural). 
+* DESVENTAJA `Los nombres son pluralizados basados en el inglés, no en español`. Por ejemplo: `user` se pluraliza como `users`, pero los nombres en espaplo no siempre se pluralizan de forma correcta.  
+* Recuerdo que este comportamiento se puede cambiar, pero no intentaré por el momento documentarlo aquí.  
 
-:star: Por suerte, tenemos otra alternativa que he documentado como `Forma 2.b` por cuestiones de refencia.  
+:star: Por suerte, tenemos otra alternativa que he documentado como `Forma 2.b` por cuestiones de referencia.  
 
 ##### Forma 2.b:  
 ```php
