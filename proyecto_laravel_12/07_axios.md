@@ -17,7 +17,7 @@ window.axios = axios;
 app.mount('#app');
 ```
 ### Notas
-* `app.config.globalProperties.$axios = axios;` crea una propiedad global llamada `$axios` para ser utilizada en entorno de Vue. Se utiliza cuando en los componentes trabajamos con **Options API** y se utilizará de esta manera `this.$axios.get(...)..`  
+* `app.config.globalProperties.$axios = axios;` crea una propiedad global llamada `$axios` para ser utilizada en entorno de Vue. Se utiliza cuando en los componentes trabajamos con **Options API** y se utilizará de esta manera `this.$axios.get(...)...`  
 * **window.axios = axios;** Crea una propiedad para ser utilizada en entornos diferentes de Vue. En la práctica estamos utilizando `axios`, la variable definida en `window.axios`.
 * Pero he probado y no se necesita ninguna de estas configuraciones en el proyecto porque el proyecto ya está utilizando `bootstrap` este incluye una configuración para usar `axios`.  
 
