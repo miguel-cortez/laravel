@@ -1,4 +1,4 @@
-# AXIOS
+# Configuración y uso de Axios
 
 ## Paso 1. Modificar el archivo appVue.js para integrar axios
 
@@ -33,11 +33,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 ```
 Entonces, en `appVue.js` podría NO incluir instrucciones para utilizar `axios`. Solo será necesario `app.config.globalProperties.$axios = axios;` si va a utilizar `Options API` en sus diseños creados con `vue`.  
 
-## Paso 2. Crear un componente de vue
+## Paso 2. Crear un componente de Vue
 
 **resources\js\components\ProductoComponent.vue**  
 
-### CASO 1  
+### Caso 1. Options API y una función normal.    
 :books: Nota. Este ejemplo es con **Options API** y una función normal para ejecutar para ejecutar la petición con `this.$axios`. Cuando se utiliza una `función normal` no se puede acceder a `this` dentro de la aplicación de `axios`.  Por esta razón fue necesario crear una variable `me` para guardar la referencia a `this` y poder acceder a las variables definidas en `data()`.   
 
 ```javascript
@@ -85,7 +85,7 @@ export default {
 ```
 :warning: Complicaciones a la hora de probar esta opción. No se puede acceder a `products` dentro de `this.$axios.get("/api/dashboard/productos").then(function (response){ AQUÍ }` porque estamos fuera del ábmito de donde se conoce `this` y es necesario crear una variable, que en mi caso se llama `me` pero el nombre puede ser cualquier otro nombre de variable válido. A la variable se le asigna el valor `this` y con esto podemos utilizar la `varariable` en sustituto de `this` 
 
-### CASO 2  
+### Caso 2. Options API y una función flecha.  
 :books: Nota. Este ejemplo es con **Options API** y una `función flecha` para ejecutar para ejecutar la petición con `this.$axios`. Cuando se utiliza una `función flecha` se puede acceder a `this` dentro de la petición de `axios`.   
 
 ```javascript
@@ -131,9 +131,9 @@ export default {
 </script>
 ```
 
-:warning: Utilizando una `función flecha` no hay problema para acceder a `this`.
+:sweat_drops: Utilizando una `función flecha` no hay problema para acceder a `this`.
 
-### CASO 3  
+### Caso 3. Composition API.    
 :books: Nota. Este ejemplo es con **Composition API** para ejecutar la petición con `axios`. En este caso es necesario agregar `setup` en `<script setup>`    
 
 ```javascript
@@ -174,6 +174,6 @@ const getProductos = async () => {
 
 ### Resultado
 
-Nota. Los 3 ejemplos presentados arriba generan el mismo resultado.  
+Los :three: ejemplos presentados arriba generan el mismo resultado.  
 
 ![image](./img/lista_productos.png)  
