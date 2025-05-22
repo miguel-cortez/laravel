@@ -6,9 +6,9 @@
 
 :pushpin: Es importante seguir un formato estándar a la hora de nombrar la migración para que se cree de forma conveniente. Me refiero a usar nombres como `createCategoriasTable` y `createProductosTable`. Creo que también se pueden usar nombres como `create_categorias_table`  y  `create_productos_table`.  
 
-## Definir las migraciones.
+## Formas para crear las relaciones entre tablas
 
-Nota. Se pretende mostrar cómo crear tablas relacionadas.  
+(ejemplos tomados de la página oficial de Laravel)  
 
 #### Forma 1:
 
@@ -89,7 +89,7 @@ return new class extends Migration
 
 ## Definir la migración para la tabla productos (tabla hija)
 
-:books: Se ha utilizado la segunda forma explicada arriba.  
+:books: Se ha utilizado la segunda forma explicada arriba (Forma 2.b)
 
 Comando: `php artisan make:migration createProductosTable`  
 
@@ -137,7 +137,10 @@ return new class extends Migration
 
 ![imagen](./img/productos_myisam.png)  
 
-Observe las líneas resaltadas con un borde de color amarillo. No existe la relación con la tabla `categorias` y se está utilizando el motor de almacenamiento `MyISAM`      
+:star: Observe las líneas resaltadas con un borde de color amarillo. No existe la relación con la tabla `categorias` y se está utilizando el motor de almacenamiento `MyISAM`      
+
+
+Archivo de configuraciones original: `config\database.php`  
 
 ```php
 <?php
@@ -182,9 +185,11 @@ return [
 
 ];
 ```
-:warning: El comportamiento expuesto se debe a la siguiente configuración `'engine' => null,`. No se ha especificado el `motor de almacenamiento` para la base de datos. Los motores típicos son `MyISAM` e `InnoDB`. Por defecto se utiliza el motor de almacenamiento `MyISAM` y este motor exige las restricciones.
+:warning: El comportamiento expuesto se debe a `'engine' => null,`. No se ha especificado el `motor de almacenamiento` para la base de datos. Los motores típicos son `MyISAM` e `InnoDB`. Por defecto se utiliza el motor de almacenamiento `MyISAM` (a pesar de tener el valor `null`) y este motor NO exige las restricciones de `FOREIGN KEY ... REFERENCES` 
 
 ## Especificar el motor de almacenamiento.
+
+Archivo de configuraciones modificado: `config\database.php`  
 
 ```php
 <?php
@@ -217,7 +222,7 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,
-            'engine' => 'InnoDB',
+            'engine' => 'InnoDB', // ESTA ES LA LINEA MODIFICADA.
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
@@ -228,16 +233,18 @@ return [
     ],
 
 ];
-```
+```   
 
-Observe las líneas resaltadas con un borde de color amarillo.   
-
-:warning: Ahora la configuración se ha cambiado de `null` a `InnoDB` en `'engine' => null,`. 
+:warning: Ahora, el vaor de `engine`   se ha cambiado de `null` a `InnoDB`. 
 
 ## Ejecutar las migraciones.
 
-Si ahora ejecuta las migraciones, ya tendrá las restricciones entre las tablas `caterogias` y `productos`
+`php artisan migrate`  
+
+Si ahora ejecuta las migraciones, ya tendrá las restricciones entre las tablas `caterogias` y `productos`  
+
+Puede utilizar el comando `show create table productos` para ver los comandos que definen la estructura de la tabla `productos`. Esto se puede ejecutar en una consola de `MySQL`  
 
 ![image](./img/productos_innodb.png)  
 
-Observe las líneas resaltadas con un borde de color amarillo. Ahora sí existe la relación con la tabla `categorias` y se está utilizando el motor de almacenamiento `InnoDB`    
+:star: Observe las líneas resaltadas con un borde de color amarillo. Ahora sí existe la relación con la tabla `categorias` y se está utilizando el motor de almacenamiento `InnoDB`    
