@@ -243,7 +243,7 @@ return [
 
 Si ahora ejecuta las migraciones, ya tendrá las restricciones entre las tablas `caterogias` y `productos`  
 
-Puede utilizar el comando `show create table productos` para ver los comandos que definen la estructura de la tabla `productos`. Esto se puede ejecutar en una consola de `MySQL`  
+Puede utilizar el comando `show create table productos;` para ver los comandos que definen la estructura de la tabla `productos`. Esto se puede ejecutar en una consola de `MySQL`  
 
 ![image](./img/productos_innodb.png)  
 
