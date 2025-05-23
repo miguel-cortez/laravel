@@ -190,8 +190,9 @@ Vista del gráfico con datos estáticos:
 
 :star: En este paso vamos a hacer una petión a la base de datos con `axios` para obtener los datos que serán mostrados en el gráfico y se modificará el código del ejemplo para que utilice los datos obtenidos desde la base de datos en lugar de usar los datos estáticos.
 
+:pushpin: Como información extra, presento la estructura de las tablas usadas en el ejemplo:  
 ### Tabla: categorias
-Como información extra, presento la estructura de las tablas usadas en el ejemplo:  
+
 ![image](./img/estructura_tabla_categorias.png)  
 
 ### Tabla: productos
