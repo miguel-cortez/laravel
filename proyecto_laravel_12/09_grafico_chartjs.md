@@ -151,7 +151,7 @@ const items = ref([
             {
                 icon: 'pi pi-slack',
                 label: 'Productos por categoría',
-                url: '/dashboard/prods_cat',
+                route: '/dashboard/prods_cat',
             },
         ]
     },
@@ -163,6 +163,8 @@ const items = ref([
 
 </style>
 ```
+
+:beetle: Comentar que inicialmente había dejado `url` en lugar de `route` en la línea `route: '/dashboard/prods_cat',`, entonces, la página cargaba por completo. Es decir, como si no estuviera utilizando `vue-router`.
 
 ## Paso 5. Ejecutar la aplicación y mostrar el informe
 
