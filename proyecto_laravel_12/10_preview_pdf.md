@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string("nombre",100);
             $table->integer("stock");
             $table->decimal('precio', total: 8, places: 2);
-            $table->string("ficha_tecnica",100)->nullable();
+            $table->string("ficha_tecnica",100)->nullable(); // LINEA AGREGADA
             $table->foreignId('categoria_id')->constrained(
                 table: 'categorias', indexName: 'productos_categoria_id'
             );
@@ -48,7 +48,7 @@ return new class extends Migration
 
 La única línea que agregué es `$table->string("ficha_tecnica",100)->nullable();`.
 
-Luego, es necesario ejecutar nuevamente las migraciones y los seeder (en mi caso). Lo que realmente se necesita es que la tabla de `productos` tenga el nuevo campo.
+Luego, es necesario ejecutar nuevamente las migraciones y los seederS (en mi caso). Lo que se necesita es que la tabla de `productos` tenga el nuevo campo `ficha_tecnica`.
 
 ## Paso 2. Copiar un archivo PDF en el servidor
 
