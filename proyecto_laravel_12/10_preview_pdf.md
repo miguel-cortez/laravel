@@ -209,3 +209,20 @@ Como solo el producto con :id: 1 tiene documento pdf asociado (ficha técnica) s
 
 ![image](./img/vista_previa_ficha_tecnica.png)  
 
+ ## Paso 8 (OPCIONAL). Habilitar tooltip de Primevue
+
+El botón para visualizar el PDF incluye un mensaje de ayuda (tip); pero para que funcione se debe importar un componente de Primevue.
+
+Las líneas se agregaron en `resources\js\appVue.js` 
+
+```php
+import { createApp } from 'vue';
+// código omitido
+import Tooltip from 'primevue/tooltip'; // LINEA AGREGADA
+
+const app = createApp(App);
+// código omitido
+app.directive('tooltip', Tooltip); // LINEA AGREGADA
+// código omitido
+app.mount('#app');
+```
