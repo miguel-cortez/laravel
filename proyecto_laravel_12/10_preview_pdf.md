@@ -209,6 +209,10 @@ Como solo el producto con :id: 1 tiene documento pdf asociado (ficha técnica) s
 
 ![image](./img/vista_previa_ficha_tecnica.png)  
 
+Si más producto tuvieran ficha técnica, la interfaz gráfica se vería como la siguiente imagen: 
+
+![image](./img/vista_previa_ficha_tecnica_2.png)  
+
  ## Paso 8 (OPCIONAL). Habilitar tooltip de Primevue
 
 El botón para visualizar el PDF incluye un mensaje de ayuda (tip); pero para que funcione se debe importar un componente de Primevue.
