@@ -226,3 +226,14 @@ app.directive('tooltip', Tooltip); // LINEA AGREGADA
 // código omitido
 app.mount('#app');
 ```
+:star: `tooltip` se utilizó en el código del botón como se muestra en el siguiente código:  
+
+```javascript
+<Column header="&nbsp;" style="min-width: 12rem">
+  <template #body="slotProps">
+    <Button icon="pi pi-file-pdf" v-tooltip.top="'Ver ficha técnica'" severity="warn" @click="cargarPdf(slotProps.data)" />
+  </template>
+</Column>
+```
+
+Específicamente en `v-tooltip.top="'Ver ficha técnica'"`  
