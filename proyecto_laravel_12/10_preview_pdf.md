@@ -237,3 +237,6 @@ app.mount('#app');
 ```
 
 Específicamente en `v-tooltip.top="'Ver ficha técnica'"`  
+
+![image](./img/tooltip_boton_preview_pdf_file.png)  
+
