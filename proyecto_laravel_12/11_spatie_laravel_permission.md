@@ -340,7 +340,110 @@ Se puede remover el rol `estandar` al usuario usando el siguiente comomando:
 $user->removeRole('estandar');
 ```
 
-:zap: PENDIENTE. ANALIZAR QUÉ ES SINCRONIZAR / DESINCRONIZAR ROLES...
+:zap: Sincronizar roles.
+
+Consiste en eliminar todos los roles actuales del usuario y sustituirlos los nuevos roles definidos en el arreglo.
+
+```php
+$user->syncRoles(['writer', 'admin']);
+```
+
+### 4.3 Verificando los roles.
+
+Para saber si un usuario tiene asignado un rol se puede ejecutar el siguiente comando. El resultado es un valor lógico.  
+
+```php
+$user->hasRole('estandar');
+```
+![image](./img/has_role.png)  
+
+También se puede saber si tiene por lo menos un rol del los roles pasados en el erreglo.  
+
+```php
+$user->hasRole(['editor', 'moderator','estandar']);
+```
+
+### 4.4 Verificando si un role tiene un permiso
+
+```php
+$role = Role::find(1);
+$role->hasPermissionTo('editar productos');
+```
+
+![image](./img/has_permission_to.png)  
+
+## 5. Usuarios y permisos
+
+:star: **LA MEJOR PRÁCTICA** es asignar permisos a los roles y luego, asginar roles a usuarios.
+
+### 5.1 Asignar un permisos a un usuario  
+
+```php
+$user->givePermissionTo('agregar productos');
+```
+![image](./img/permission_does_not_exists.png)  
+
+:pushpin: A pesar de que el permiso parece ser una simple cadena, el permiso debe estar agregado en la base de datos.
+
+**Recordarotiro** Un permiso se puede crear con el comando siguiente:  
+
+```php
+$permission = Permission::create(['name' => 'agregar productos']);
+```
+
+![image](./img/permission_agregar_productos.png)  
 
 
+![image](./img/permission_agregrar_productos_ok.png)  
+
+
+:books: Puede agregar múltiples permisos a un usuario en un solo comando (tiene dos formas):  
+
+```php
+$user->givePermissionTo('agregar productos', 'editar productos', 'eliminar productos');
+```
+
+```php
+$user->givePermissionTo(['agregar productos', 'editar productos', 'eliminar productos']);
+```
+
+### 5.2 Eliminar permisos a un usuario
+
+```php
+$user->revokePermissionTo('agregar productos');
+```
+
+### 5.3 Verificando los permisos directos de un usuario
+
+```php
+$user->can('agregar productos');
+```
+
+![image](./img/can_agregar_productos.png)  
+
+```php
+$user->can('editar productos');
+```
+
+![image](./img/can_editar_productos.png)  
+
+:star: Note que aún cuando el permiso `editar productos` fue asignado al rol `estandar` y luego, el rol `estandar` asignado al usuario, el comando `$user->can('editar productos');` devuelve `true` 
+
+**Otra forma** para determinar si un usuario tiene asignado un permiso:  
+
+![image](./img/user_has_permission_to.png)  
+
+CONSULTANDO LAS TABLAS:  
+
+![image](./img/users_finalmente.png)  
+
+![image](./img/roles_finalmente.png)  
+
+![image](./img/permissions_finalmente.png)  
+
+![image](./img/role_has_permissions_finalmente.png)  
+
+![image](./img/model_has_roles_finalmente.png)  
+
+![image](./img/model_has_permissions_finalmente.png)  
 
