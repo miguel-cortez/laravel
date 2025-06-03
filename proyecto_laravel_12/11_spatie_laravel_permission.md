@@ -2,7 +2,7 @@
 
 ## ANTES DE COMENZAR
 
-:star: Es bueno comentar que he creado el proyecto con los comandos propuestos por la página oficial de laravel (laravel.com)  y además, he instalado `laravel/breeze` para la gestión de usuarios y la autenticación; entonces, algunas de las tablas mostradas abajo pueden ser producto de laravel/breeze (:zzz: no lo he confirmado).
+:star: Es bueno comentar que he creado el proyecto con los comandos propuestos por la página oficial de laravel (laravel.com)  y además, he instalado `laravel/breeze` para la gestión de usuarios y la autenticación; entonces, algunas de las tablas mostradas abajo pueden ser producto de laravel/breeze (no lo he confirmado).
 
 :star: Quiero dejar constancia de las tablas que tiene la base de datos antes de comenzar con la configuración de `spatie/laravel-permission` 
 
@@ -193,7 +193,7 @@ Las tablas después de las migraciones:
 
 ## PASO 3. USO DE LARAVEL-PERMISSION
 
-:warning: En este paso, lo único que me interesa es crear roles, permisos y asignarlos a un usuario. Puede saltar la lectura del **PASO 3**. Además , la documentación que aquí presento ha sido tomada del sitio oficial [laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction) y he llevado acabo la práctica para verificar los resultados obtenidos por cada uno de los comandos expuestos.
+:warning: En este paso, lo único que me interesa es crear roles, permisos y asignarlos a un usuario. Puede saltar la lectura del **PASO 3**. Además , la documentación que aquí presento ha sido tomada del sitio oficial [laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction) y he llevado acabo la práctica para verificar los resultados obtenidos para al ejecutar los comandos expuestos.
 
 :books: El verdadero objetivo al fin de cuentas es utilizar los usuarios, roles y permisos en un proyecto para bloquer entre otras cosas, partes de los menús o acciones específicas como **evitar que se pueda eliminar o editar algún registro**.  
 
