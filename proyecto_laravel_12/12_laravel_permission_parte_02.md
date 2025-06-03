@@ -1,5 +1,7 @@
 # SPATIE/LARAVEL-PERMISSION 
 
+PARTE II. USO
+
 ## 1. INTRODUCCIÓN
 :warning: La documentación que aquí presento ha sido tomada del sitio oficial de [spatie/laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction). Por lo tanto, si usted prefiere puede consultar la documentación oficial. En este documento solo agrego mis propios comentarios y evidencias de la ejecución de algunos comandos con fines académicos.  
 
