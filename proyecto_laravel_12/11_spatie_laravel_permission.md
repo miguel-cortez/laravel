@@ -1,6 +1,6 @@
-# spatie/laravel-permission
+# SPATIE/LARAVEL-PERMISSION
 
-## Antes de comenzar
+## ANTES DE COMENZAR
 
 :star: Es bueno comentar que he creado el proyecto con los comandos propuestos por la página oficial de laravel (laravel.com)  y además, he instalado `laravel/breeze` para la gestión de usuarios y la autenticación; entonces, algunas de las tablas mostradas abajo pueden ser producto de laravel/breeze (:zzz: no lo he confirmado).
 
@@ -14,7 +14,7 @@ show tables
 
 ![image](./img/tablas_antes_laravel_permission.png)  
 
-## Paso 1. Prerequisitos
+## PASO 1. PREREQUISITOS
 
 Para las versiones de `Laravel 8,9,10,11,12` se requiere la versión del paquete `^6.0 (PHP 8.0+)`. Información tomada de `https://spatie.be/docs/laravel-permission/v6/prerequisites`  
 
@@ -113,7 +113,7 @@ class User extends Authenticatable
 
 Referencia: `https://spatie.be/docs/laravel-permission/v6/prerequisites` 
 
-## Paso 2. Instalación / configuración
+## PASO 2. INSTALACIÓN / CONFIGURACIÓN
 
 :star: Este paquete publica un archivo de configuración en `config/permission.php`. Si tiene algún archivo con el mismo nombre es necesario renombrarlo o borrarlo antes de continuar.  
 
@@ -191,7 +191,11 @@ Las tablas después de las migraciones:
 
 ![image](./img/tablas_despues_migraciones_laravel_permission.png)  
 
-## 3. Roles y permisos
+## PASO 3. USO DE LARAVEL-PERMISSION
+
+:warning: En este paso, lo único que me interesa es crear roles, permisos y asignarlos a un usuario. Puede saltar la lectura del **PASO 3**. Además , la documentación que aquí presento ha sido tomada del sitio oficial [laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction) y he llevado acabo la práctica para verificar los resultados obtenidos por cada uno de los comandos expuestos.
+
+:books: El verdadero objetivo al fin de cuentas es utilizar los usuarios, roles y permisos en un proyecto para bloquer entre otras cosas, partes de los menús o acciones específicas como **evitar que se pueda eliminar o editar algún registro**.  
 
 Los comandos que aquí se utilizan pueden incluirse en funciones de los controladores del modelo `MVC` y por consiguiente, ejecutar las acciones desde archivos de Blade o componentes de Vue.  
 
@@ -227,7 +231,11 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 ```
 
-### 3.3 Crear un rol llamado `estandar`
+### 3.3 Roles y permisos
+
+
+
+#### 3.3.1 Crear un rol llamado `estandar`
 
 Este rol será posteriormente asignado a los usuarios comunes (no administradores).
 
@@ -235,12 +243,11 @@ Este rol será posteriormente asignado a los usuarios comunes (no administradore
 $role = Role::create(['name' => 'estandar']);
 ```
 
-### 3.4 Crear un permiso para editar productos
+#### 3.3.2 Crear un permiso para editar productos
 
 ```php
 $permission = Permission::create(['name' => 'editar productos']);
 ```
-:eye: Evidencias de los pasos **3.1 - 3.4**  
 
 ![image](./img/crear_roles_y_permisos.png)  
 
@@ -254,7 +261,7 @@ Consultando la tabla `permissions` en la consola de `MySQL`:
 
 ![image](./img/nuevo_permiso_mysql.png)  
 
-### 3.5 Asignar el permiso `editar productos` al rol `estandar` 
+#### 3.3.3 Asignar el permiso `editar productos` al rol `estandar` 
 
 Este proceso se puede hacer con uno de los dos siguientes comandos (el resultado es el mismo):  
 
@@ -278,7 +285,8 @@ Recordatorio:
 * El permiso `1` es `editar productos` 
 * El rol `1` es `estandar` 
 
-**REMOVER PERMISOS**
+#### 3.3.4 Remover un permiso
+
 :star: La variable `$permission` debe tener un objeto de tipo `Permission` de `spatie/laravel-permission`. En este momento se podría remover el permiso `editar productos` del rol `estandar` sin buscarlo el permiso porque la variable `$permission` ya tiene la información del permiso que creamos arriba ("editar productos")  
 
 ```php
@@ -294,11 +302,11 @@ $permission->removeRole($role);
 
 Para más información `https://spatie.be/docs/laravel-permission/v6/basic-usage/basic-usage`  
 
-## 4. Usuarios y roles
+### 3.4 Usuarios y roles
 
 En este apartado se explicará cómo asignar o remover roles a los usuarios.
 
-### 4.1 Buscar un usuario
+#### 3.4.1 Buscar un usuario
 
 Se buscará el usuario con `id` = `1`  
 
@@ -308,7 +316,7 @@ $user = User::find(1);
 
 ![image](./img/user_find_1.png)  
 
-### 4.2 Asignar roles
+#### 3.4.2 Asignar roles
 
 Se va a asignar el role `estandar` al usuario que se buscó en el paso anterior.  
 
@@ -332,7 +340,7 @@ $user->assignRole('writer', 'admin');
 $user->assignRole(['writer', 'admin']);
 ```
 
-**Remover un rol**
+#### 3.4.3 Remover un rol.
 
 Se puede remover el rol `estandar` al usuario usando el siguiente comomando:  
 
@@ -340,7 +348,7 @@ Se puede remover el rol `estandar` al usuario usando el siguiente comomando:
 $user->removeRole('estandar');
 ```
 
-:zap: Sincronizar roles.
+#### 3.4.4 Sincronizar roles
 
 Consiste en eliminar todos los roles actuales del usuario y sustituirlos los nuevos roles definidos en el arreglo.
 
@@ -348,7 +356,7 @@ Consiste en eliminar todos los roles actuales del usuario y sustituirlos los nue
 $user->syncRoles(['writer', 'admin']);
 ```
 
-### 4.3 Verificando los roles.
+#### 3.4.5 Verificando los roles.
 
 Para saber si un usuario tiene asignado un rol se puede ejecutar el siguiente comando. El resultado es un valor lógico.  
 
@@ -363,7 +371,7 @@ También se puede saber si tiene por lo menos un rol del los roles pasados en el
 $user->hasRole(['editor', 'moderator','estandar']);
 ```
 
-### 4.4 Verificando si un role tiene un permiso
+#### 3.4.6 Verificando si un role tiene un permiso
 
 ```php
 $role = Role::find(1);
@@ -372,11 +380,13 @@ $role->hasPermissionTo('editar productos');
 
 ![image](./img/has_permission_to.png)  
 
-## 5. Usuarios y permisos
+### 3.5 Usuarios y permisos
 
-:star: **LA MEJOR PRÁCTICA** es asignar permisos a los roles y luego, asginar roles a usuarios.
+:no_entry_sign: Esta no es la mejor práctica. 
 
-### 5.1 Asignar un permisos a un usuario  
+:white_check_mark: Es mejor asignar permisos a roles y roles a usuarios.  
+
+#### 3.5.1 Asignar un permisos a un usuario  
 
 ```php
 $user->givePermissionTo('agregar productos');
@@ -407,13 +417,13 @@ $user->givePermissionTo('agregar productos', 'editar productos', 'eliminar produ
 $user->givePermissionTo(['agregar productos', 'editar productos', 'eliminar productos']);
 ```
 
-### 5.2 Eliminar permisos a un usuario
+#### 3.5.2 Eliminar permisos a un usuario
 
 ```php
 $user->revokePermissionTo('agregar productos');
 ```
 
-### 5.3 Verificando los permisos directos de un usuario
+#### 3.5.3 Verificando los permisos directos de un usuario
 
 ```php
 $user->can('agregar productos');
@@ -433,11 +443,11 @@ $user->can('editar productos');
 
 ![image](./img/user_has_permission_to.png)  
 
-## 6. Obtener roles y permisos vinculados a un usuario
+### 3.5. Obtener roles y permisos vinculados a un usuario
 
 :books: Anteriormente se han utilizado comandos para verificar por ejemplo si un usuario tiene un rol o un permiso, obteniendo un valor lógico; sin embargo, algunas veces es necesario obtener los roles asignados a un usuario, los permisos asignados a un rol, los permisos directos asociados a un usuario o lo permisos asociados a un usuario de forma indirecta a mediante la asignación de roles. En esta sección se han documentado estos comandos.
 
-### 6.1 Obtener la colección de roles de un usuario.
+#### 3.5.1 Obtener la colección de roles de un usuario.
 
 Vamos a asumir que la información de un usuario ya la tenemos en la variable `$user`.
 
@@ -447,9 +457,9 @@ $roles = $user->getRoleNames();
 
 ![image](./img/user_get_roles.png)  
 
-### 6.2 Obtener los permisos de un usuario
+#### 3.5.2 Obtener los permisos de un usuario
 
-#### 6.2.1 Obtener solo los nombres de los permisos
+##### 3.5.2.1 Obtener solo los nombres de los permisos
 
 ```php
 $permissionNames = $user->getPermissionNames();
@@ -457,7 +467,7 @@ $permissionNames = $user->getPermissionNames();
 
 ![image](./img/user_get_permission_names.png)  
 
-#### 6.2.1 Obtener los objetos de los permisos
+##### 3.5.2.2 Obtener los objetos de los permisos
 
 ```php
 $permissions = $user->permissions;
@@ -465,7 +475,7 @@ $permissions = $user->permissions;
 
 ![image](./img/user_permission_objects.png)  
 
-#### 6.2.2 Obtener los permisos asignados directamente
+##### 3.5.2.2 Obtener los permisos asignados directamente
 
 Son los permisos que no han sido asignados a los usurios mediante roles, sino, el permiso asignado de forma directa al usuario.  
 
@@ -474,7 +484,7 @@ $permissions = $user->getDirectPermissions();
 ```
 ![image](./img/get_user_direct_permissions.png)  
 
-#### 6.2.3 Obtener los permisos del usuario via roles
+##### 3.5.2.3 Obtener los permisos del usuario via roles
 
 ```php
 $permissions = $user->getPermissionsViaRoles();
@@ -482,7 +492,7 @@ $permissions = $user->getPermissionsViaRoles();
 
 ![image](./img/get_user_permissions_via_roles.png)  
 
-#### 6.2.4 Obtener todos los permisos
+##### 3.5.2.4 Obtener todos los permisos
 
 ```php
 $permissions = $user->getAllPermissions();
@@ -490,7 +500,7 @@ $permissions = $user->getAllPermissions();
 
 ![image](./img/get_user_all_permissions.png)  
 
-## Registro de datos en las tablas
+## CONSULTANDO LAS TABLAS
 
 En este apartado puede consultar cómo queda guardada la información en las tablas de la base de datos.
 
