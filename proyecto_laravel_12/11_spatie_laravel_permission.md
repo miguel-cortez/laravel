@@ -433,7 +433,66 @@ $user->can('editar productos');
 
 ![image](./img/user_has_permission_to.png)  
 
-CONSULTANDO LAS TABLAS:  
+## 6. Obtener roles y permisos vinculados a un usuario
+
+:books: Anteriormente se han utilizado comandos para verificar por ejemplo si un usuario tiene un rol o un permiso, obteniendo un valor lógico; sin embargo, algunas veces es necesario obtener los roles asignados a un usuario, los permisos asignados a un rol, los permisos directos asociados a un usuario o lo permisos asociados a un usuario de forma indirecta a mediante la asignación de roles. En esta sección se han documentado estos comandos.
+
+### 6.1 Obtener la colección de roles de un usuario.
+
+Vamos a asumir que la información de un usuario ya la tenemos en la variable `$user`.
+
+```php
+$roles = $user->getRoleNames();
+```
+
+![image](./img/user_get_roles.png)  
+
+### 6.2 Obtener los permisos de un usuario
+
+#### 6.2.1 Obtener solo los nombres de los permisos
+
+```php
+$permissionNames = $user->getPermissionNames();
+```
+
+![image](./img/user_get_permission_names.png)  
+
+#### 6.2.1 Obtener los objetos de los permisos
+
+```php
+$permissions = $user->permissions;
+```
+
+![image](./img/user_permission_objects.png)  
+
+#### 6.2.2 Obtener los permisos asignados directamente
+
+Son los permisos que no han sido asignados a los usurios mediante roles, sino, el permiso asignado de forma directa al usuario.  
+
+```php
+$permissions = $user->getDirectPermissions();
+```
+![image](./img/get_user_direct_permissions.png)  
+
+#### 6.2.3 Obtener los permisos del usuario via roles
+
+```php
+$permissions = $user->getPermissionsViaRoles();
+```
+
+![image](./img/get_user_permissions_via_roles.png)  
+
+#### 6.2.4 Obtener todos los permisos
+
+```php
+$permissions = $user->getAllPermissions();
+```
+
+![image](./img/get_user_all_permissions.png)  
+
+## Registro de datos en las tablas
+
+En este apartado puede consultar cómo queda guardada la información en las tablas de la base de datos.
 
 ![image](./img/users_finalmente.png)  
 
