@@ -125,6 +125,10 @@ A continuación se muestra el archivo creado:
 
 Mostrando la lista de los backup creados  
 
+```
+php artisan backup:list
+```
+
 ![image](./img/backup_list.png)  
 
 ## Programando backup automáticos
