@@ -24,13 +24,13 @@ Al final del documento se encuentra la referencia, donde podrá ver el contenido
 
 ## (OPCIONAL) Publicar los archivos de idiomas
 
+:star: Yo no ejecuté el comando  
+
 Comando:  
 
 ```
 php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider" --tag=backup-translations
 ```
-
-:star: Yo no ejecuté el comando  
 
 ## (OPCIONAL) Configurar el directorio de destino para crear el backup   
 
