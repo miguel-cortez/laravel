@@ -23,7 +23,6 @@ php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider" --ta
 Al final del documento se encuentra la referencia, donde podrá ver el contenido por defecto del archivo de configuraciones.  
 
 ## (OPCIONAL) Publicar los archivos de idiomas
-:star: Yo no realicé este proceso.  
 
 Comando:  
 
@@ -31,7 +30,11 @@ Comando:
 php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider" --tag=backup-translations
 ```
 
-## (OPCIONAL) Configurar el directorio de destino para crear el backup
+:star: Yo no ejecuté el comando  
+
+## (OPCIONAL) Configurar el directorio de destino para crear el backup   
+
+:star: Yo no configuré un nuevo directorio de destino.    
 
 Esta configuración se hace en `config\filesystems.php`
 
