@@ -4,7 +4,7 @@
 
 Se pretede crear una ruta web protegida en `routes\web.php` mediante el uso de `Middleware`. Vamos a suponer que la creación copias de seguridad de la base de datos solo estará disponible para algún o algunos usuarios específicos (los que cumplan con los criterios definidos en el middleware).  
 
-## Creación del Middleware
+## 1. Creación del Middleware
 
 Se creará un middleware con el nombre `BackupAdmin`  
 
@@ -16,9 +16,7 @@ php artisan make:middleware BackupAdmin
 
 ![image](./img/make_backup_admin_middleware.png)  
 
-Esta es la ruta del archivo creado: `app\Http\Middleware\BackupAdmin.php`  
-
-y el contenido por defecto del archivo es el siguiente:  
+Esta es la ruta del archivo creado: `app\Http\Middleware\BackupAdmin.php` y el contenido por defecto del archivo es el siguiente:  
 
 ```php
 <?php
@@ -43,9 +41,9 @@ class BackupAdmin
 }
 ```
 
-## Agregar la lógica del Middleware
+## 1. Agregar la lógica del Middleware
 
-:books: En el Middleware podemos agregar cualquier lógica que permita determinar los criterios que nosotros queremos que se cumplan para acceder a la ruta de destino. En caso que no se cumpla, vamos a realizar la acción que nosotros decidamos. Cuando las condiciones se haya superado podrá acceder al recurso de destino con el comando `return $next($request)` de la función  `handle` 
+:books: En el Middleware podemos agregar cualquier lógica que permita determinar los criterios que nosotros queremos que se cumplan para acceder al recurso de destino. En caso que no se cumplan los criterios, vamos a realizar la acción que nosotros decidamos. Cuando las condiciones se haya superado podrá acceder al recurso de destino con el comando `return $next($request)` de la función  `handle` definida en la clase `BackupAdmin`  
 
 El código agregado al Middleware fue el siguiente:  
 
@@ -69,7 +67,7 @@ Para determinar si el usuario autenticado pertenece al rol `administrador`. En m
   }
 ```
 
-## Registrar globalmente el Middleware
+## 3. Registrar globalmente el Middleware
 
 Para registrar el nuevo middleware se modifica el archivo `bootstrap\app.php` 
 
@@ -146,8 +144,36 @@ return Application::configure(basePath: dirname(__DIR__))
 
 :bulb: En la práctica, he observado que puedo utilizar el Middleware aún sin registrarlo. Basta con importar el Middleware `BackupAdmin` en el archivo `routes\web.php` 
 
+## 4. Definiendo la ruta web
 
-## Creando el backup
+Esta ruta se define en el archivo `routes\web.php` 
+
+Lo primero que debemos hacer es importar la clase del Middleware `BackupAdmin` con el siguiente comando:  
+```php
+use App\Http\Middleware\BackupAdmin;
+```
+
+
+### Forma :a: - Utilizando la clase BackupAdmin de forma explícita
+```php
+Route::get("/bk", function(){
+    $output = shell_exec("C:/wamp64/bin/mysql/mysql9.1.0/bin/mysqldump -u root example_app > C:/Users/macv/Documents/example_app.sql");
+    //echo $output;
+    echo "Backup realizado";
+})->middleware(['auth', 'verified', BackupAdmin::class])->name('bk');
+```
+
+### Forma :b: - Utilizando el alias
+
+```php
+Route::get("/bk", function(){
+    $output = shell_exec("C:/wamp64/bin/mysql/mysql9.1.0/bin/mysqldump -u root example_app > C:/Users/macv/Documents/example_app.sql");
+    //echo $output;
+    echo "Backup realizado";
+})->middleware(['auth', 'verified', BackupAdmin::class])->name('bk');
+```
+
+## 5. Creando el backup
 
 Ejecutar la aplicación y acceder a la ruta `http://localhost:8000/bk` 
 
