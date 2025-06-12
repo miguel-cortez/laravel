@@ -41,7 +41,7 @@ class BackupAdmin
 }
 ```
 
-## 1. Agregar la lógica del Middleware
+## 2. Agregar la lógica del Middleware
 
 :books: En el Middleware podemos agregar cualquier lógica que permita determinar los criterios que nosotros queremos que se cumplan para acceder al recurso de destino. En caso que no se cumplan los criterios, vamos a realizar la acción que nosotros decidamos. Cuando las condiciones se haya superado podrá acceder al recurso de destino con el comando `return $next($request)` de la función  `handle` definida en la clase `BackupAdmin`  
 
