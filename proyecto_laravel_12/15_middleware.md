@@ -57,14 +57,37 @@ use Illuminate\Support\Facades\Auth;
 
 :two: Modificación de la función `handle`:  
 
-Para determinar si el usuario autenticado pertenece al rol `administrador`. En mi caso, estoy utilizando `spatie/laravel-permission` y un usuario puede pertenecer a múltiples roles; pero lo que me interesa en el Middleware (de mi ejemplo) es que uno de los roles del usuario sea administrador, en caso contrario, será dirigido a la ruta `/home` 
+* Para la gestión de roles estoy utilizando `spatie/laravel-permission` y un usuario puede pertenecer a múltiples roles.
+* Pero lo que me interesa es que uno de los roles del usuario sea administrador, en caso contrario, será dirigido a la ruta `/home` 
 
 ```php
-  $user = Auth::user();
-  $user->getPermissionsViaRoles();
-  if ($user->roles[0]->name == "administrador") {
-    return redirect('/home');
-  }
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;  // LÍNEA AGREGADA
+class BackupAdmin
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+      // AGREGUÉ DESDE AQUÍ
+        $user = Auth::user();
+        $user->getPermissionsViaRoles();
+        if ($user->roles[0]->name == "administrador") {
+            return redirect('/home');
+        }
+        // HASTA AQUÍ
+        return $next($request);
+    }
+}
 ```
 
 ## 3. Registrar globalmente el Middleware
@@ -125,16 +148,20 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     // código omitido
-    // Agregué desde aquí
+    // AGREGUÉ DESDE AQUÍ
+
+    // Primer bloque
     ->withMiddleware(function (Middleware $middleware) {
 
         $middleware->append(BackupAdmin::class);
 
     })
+
+    // Segundo bloque
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias(['backup' => BackupAdmin::class]);
     })
-    // Hasta aquí.
+    // HASTA AQUÍ
     ->create();
 ```
 
@@ -154,7 +181,7 @@ use App\Http\Middleware\BackupAdmin;
 ```
 
 
-### Forma :a: - Utilizando la clase BackupAdmin de forma explícita
+Forma :a: - Utilizando la clase BackupAdmin de forma explícita
 ```php
 Route::get("/bk", function(){
     $output = shell_exec("C:/wamp64/bin/mysql/mysql9.1.0/bin/mysqldump -u root example_app > C:/Users/macv/Documents/example_app.sql");
@@ -163,7 +190,7 @@ Route::get("/bk", function(){
 })->middleware(['auth', 'verified', BackupAdmin::class])->name('bk');
 ```
 
-### Forma :b: - Utilizando el alias
+Forma :b: - Utilizando el alias
 
 ```php
 Route::get("/bk", function(){
