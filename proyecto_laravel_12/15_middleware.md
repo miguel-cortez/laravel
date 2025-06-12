@@ -169,7 +169,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
 :green_book: El segundo bloque, también registra el Middleware; pero además le asigna un alias o sobrenombre que podrá ser utilizado en la ruta que se defina en el archivo `routes\web.php`. Esto será como una manera corta de hacer referencia al mismo Middleware.
 
-:bulb: En la práctica, he observado que puedo utilizar el Middleware aún sin registrarlo. Basta con importar el Middleware `BackupAdmin` en el archivo `routes\web.php` 
+:construction: En la práctica, he observado que se puede usar el middleware con solo immportarlo en `routes\web.php` (sin registrarlo), **excepto** si se quiere utilizar el **alias**  
 
 ## 4. Definiendo la ruta web
 
@@ -181,7 +181,7 @@ use App\Http\Middleware\BackupAdmin;
 ```
 
 
-Forma :a: - Utilizando la clase BackupAdmin de forma explícita
+:a: - Utilizando la clase BackupAdmin de forma explícita
 ```php
 Route::get("/bk", function(){
     $output = shell_exec("C:/wamp64/bin/mysql/mysql9.1.0/bin/mysqldump -u root example_app > C:/Users/macv/Documents/example_app.sql");
@@ -190,7 +190,7 @@ Route::get("/bk", function(){
 })->middleware(['auth', 'verified', BackupAdmin::class])->name('bk');
 ```
 
-Forma :b: - Utilizando el alias
+:b: - Utilizando el alias
 
 ```php
 Route::get("/bk", function(){
