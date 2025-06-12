@@ -157,9 +157,9 @@ return Application::configure(basePath: dirname(__DIR__))
 
 :orange_book: El primer bloque, registra el middleware **BackupAdmin**.  
 
-:green_book: El segundo bloque, también registra el middleware; pero además le asigna un alias o sobrenombre que podrá ser utilizado en la ruta. **NO NECESITA** los dos bloques código, sino, son dos maneras de hacer básicamente lo mismo.  
+:green_book: El segundo bloque, también registra el middleware; pero además le asigna un **alias** o **sobrenombre** que podrá ser utilizado en la ruta. **NO NECESITA** los dos bloques de código porque son dos maneras de hacer básicamente lo mismo.  
 
-:construction: En la práctica, he observado que se puede usar **BackupAdmin** con solo immportarlo en `routes\web.php` (sin registrarlo), **excepto** si se quiere utilizar el **alias**  
+:construction: En la práctica, he observado que se puede usar **BackupAdmin** con solo importarlo en `routes\web.php` (sin registrarlo), **excepto** si se quiere utilizar el **alias**  
 
 ## 4. Definiendo la ruta web
 
@@ -171,7 +171,7 @@ use App\Http\Middleware\BackupAdmin;
 ```
 
 
-:a: - Utilizando la clase BackupAdmin de forma explícita
+:a: **Utilizando la clase BackupAdmin**  
 ```php
 Route::get("/bk", function(){
     $output = shell_exec("C:/wamp64/bin/mysql/mysql9.1.0/bin/mysqldump -u root example_app > C:/Users/macv/Documents/example_app.sql");
@@ -180,7 +180,7 @@ Route::get("/bk", function(){
 })->middleware(['auth', 'verified', BackupAdmin::class])->name('bk');
 ```
 
-:b: - Utilizando el alias
+:b: **Utilizando el alias**  
 
 ```php
 Route::get("/bk", function(){
@@ -196,7 +196,8 @@ Ejecutar la aplicación y acceder a la ruta `http://localhost:8000/bk`
 
 ![image](./img/backup_realizado_web.png)  
 
-:warning: En caso que no se cumplan las condiciones verificadas en el Middleware, se mostrará el contenido de la vist `home` o en caso que la vista no esté definida se mostrará `NOT FOUND` como en la siguiente imagen:  
+
+:warning: En caso que **no se cumplan las condiciones**, se mostrará el contenido de la vist `home`.  Si la vista **home** no existe se mostrará `404 | NOT FOUND` como se ve en la imagen de abajo:  
 
 ![image](./img/home_view_not_found.png)  
 
