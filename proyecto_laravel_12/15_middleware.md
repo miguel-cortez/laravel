@@ -43,9 +43,11 @@ class BackupAdmin
 
 ## 2. Agregar la lógica del Middleware
 
-:books: En el Middleware podemos agregar cualquier lógica que permita determinar los criterios que nosotros queremos que se cumplan para acceder al recurso de destino. En caso que no se cumplan los criterios, vamos a realizar la acción que nosotros decidamos. Cuando las condiciones se haya superado podrá acceder al recurso de destino con el comando `return $next($request)` de la función  `handle` definida en la clase `BackupAdmin`  
+:guardsman: En el **middleware** podemos agregar cualquier lógica que permita determinar los criterios que nosotros queremos que se cumplan para acceder al recurso de destino. En caso contrario,  vamos a redirigir al usuario a otra vista o ejecutar alguna otra acción.
 
-El código agregado al Middleware fue el siguiente:  
+Cuando las condiciones se hayan superado, el usuario podrá acceder al recurso de destino con el comando `return $next($request)` de la función  `handle` que se encuentra definida en la clase `BackupAdmin`, es decir, en el **middleware**    
+
+Código agregado al middleware:  
 
 :one: Importación  
 
@@ -118,20 +120,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })->create();
 ```
 
-Al contenido anterior le agregaré el siguiente bloque de código, que luego explico:  
-
-```php
-    ->withMiddleware(function (Middleware $middleware) {
-
-        $middleware->append(BackupAdmin::class);
-
-    })
-    ->withMiddleware(function (Middleware $middleware) {
-        $middleware->alias(['backup' => BackupAdmin::class]);
-    })
-```
-
-Nuevo contenido del archivo:  
+**Modificación** Al archivo `bootstrap\app.php` le agregué dos bloques de código: 
 
 ```php
 <?php
@@ -148,6 +137,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     // código omitido
+
     // AGREGUÉ DESDE AQUÍ
 
     // Primer bloque
@@ -165,11 +155,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->create();
 ```
 
-:orange_book: El primer bloque, registra el Middleware BackupAdmin de una forma convencional.
+:orange_book: El primer bloque, registra el middleware **BackupAdmin**.  
 
-:green_book: El segundo bloque, también registra el Middleware; pero además le asigna un alias o sobrenombre que podrá ser utilizado en la ruta que se defina en el archivo `routes\web.php`. Esto será como una manera corta de hacer referencia al mismo Middleware.
+:green_book: El segundo bloque, también registra el middleware; pero además le asigna un alias o sobrenombre que podrá ser utilizado en la ruta. **NO NECESITA** los dos bloques código, sino, son dos maneras de hacer básicamente lo mismo.  
 
-:construction: En la práctica, he observado que se puede usar el middleware con solo immportarlo en `routes\web.php` (sin registrarlo), **excepto** si se quiere utilizar el **alias**  
+:construction: En la práctica, he observado que se puede usar **BackupAdmin** con solo immportarlo en `routes\web.php` (sin registrarlo), **excepto** si se quiere utilizar el **alias**  
 
 ## 4. Definiendo la ruta web
 
