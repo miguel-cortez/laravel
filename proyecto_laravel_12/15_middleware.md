@@ -83,7 +83,7 @@ class BackupAdmin
       // AGREGUÉ DESDE AQUÍ
         $user = Auth::user();
         $user->getPermissionsViaRoles();
-        if ($user->roles[0]->name == "administrador") {
+        if ($user->roles[0]->name != "administrador") {
             return redirect('/home');
         }
         // HASTA AQUÍ
@@ -187,7 +187,7 @@ Route::get("/bk", function(){
     $output = shell_exec("C:/wamp64/bin/mysql/mysql9.1.0/bin/mysqldump -u root example_app > C:/Users/macv/Documents/example_app.sql");
     //echo $output;
     echo "Backup realizado";
-})->middleware(['auth', 'verified', BackupAdmin::class])->name('bk');
+})->middleware(['auth', 'verified', 'backup'])->name('bk');
 ```
 
 ## 5. Creando el backup
