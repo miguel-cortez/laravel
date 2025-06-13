@@ -4,7 +4,7 @@
 
 Se pretede crear una ruta web protegida en `routes\web.php` mediante el uso de `Middleware`. Vamos a suponer que la creación copias de seguridad de la base de datos solo estará disponible para algún o algunos usuarios específicos (los que cumplan con los criterios definidos en el middleware).  
 
-## 1. Creación del Middleware
+## 1. Creación del middleware
 
 Se creará un middleware con el nombre `BackupAdmin`  
 
@@ -41,26 +41,32 @@ class BackupAdmin
 }
 ```
 
-## 2. Agregar la lógica del Middleware
+## 2. Agregar la lógica del middleware
 
-:guardsman: En el **middleware** podemos agregar cualquier lógica que permita determinar los criterios que nosotros queremos que se cumplan para acceder al recurso de destino. En caso contrario,  vamos a redirigir al usuario a otra vista o ejecutar alguna otra acción.
+:guardsman: En el **middleware** podemos agregar cualquier lógica que permita determinar los criterios que nosotros queremos que se cumplan para acceder al recurso de destino. En caso contrario,  vamos a redirigir al usuario a otra vista o ejecutar alguna otra acción.  
 
-Cuando las condiciones se hayan superado, el usuario podrá acceder al recurso de destino con el comando `return $next($request)` de la función  `handle` que se encuentra definida en la clase `BackupAdmin`, es decir, en el **middleware**    
+:white_check_mark: Cuando las condiciones se hayan superado, el usuario podrá acceder al recurso de destino con el comando `return $next($request)` de la función  `handle` que se encuentra definida en la clase `BackupAdmin`, es decir, en el **middleware**    
 
 Código agregado al middleware:  
 
-:one: Importación  
+:one: Importaciones  
 
 Para tener acceso a la información de usuario autenticado.  
 
 ```php
 use Illuminate\Support\Facades\Auth;
 ```
+Para determinar los permisos del usuario.   
+
+```php
+use Spatie\Permission\Models\Permission;
+```
 
 :two: Modificación de la función `handle`:  
 
 * Para la gestión de roles estoy utilizando `spatie/laravel-permission` y un usuario puede pertenecer a múltiples roles.
 * Pero lo que me interesa es que uno de los roles del usuario sea administrador, en caso contrario, será dirigido a la ruta `/home` 
+* Adicionalmente al rol con acceso, se verificará si el usuario tiene asignado el permiso `crear backup`. Este permiso puede haber sido asignado al usuario **via roles** o como **permiso directo**  
 
 ```php
 <?php
@@ -71,6 +77,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;  // LÍNEA AGREGADA
+use Spatie\Permission\Models\Permission; // LÍNEA AGREGADA
 class BackupAdmin
 {
     /**
@@ -80,19 +87,27 @@ class BackupAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-      // AGREGUÉ DESDE AQUÍ
+        // LINEAS AGREGADAS
         $user = Auth::user();
-        $user->getPermissionsViaRoles();
-        if ($user->roles[0]->name != "administrador") {
+        if (!$user->hasAnyRole(['administrador','supervisor'])) {
             return redirect('/home');
+        }else{
+            $permisos = $user->getAllPermissions();
+            $filtered = $permisos->filter(function (Permission $value, int $key) {
+                return $value->name = "crear backup";
+            });
+            if($filtered->count() == 0){
+                return redirect('/home');
+            }else{
+                return $next($request); // Esta líea ya existía; pero fue reubicada
+            }
         }
-        // HASTA AQUÍ
-        return $next($request);
+        // FIN DE LINEAS AGREGADAS
     }
 }
 ```
 
-## 3. Registrar globalmente el Middleware
+## 3. Registrar globalmente el middleware
 
 Para registrar el nuevo middleware se modifica el archivo `bootstrap\app.php` 
 
