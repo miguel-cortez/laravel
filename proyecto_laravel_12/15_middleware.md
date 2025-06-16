@@ -8,16 +8,12 @@ Se pretede crear una ruta web protegida en `routes\web.php` mediante el uso de `
 
 Se creará un middleware con el nombre `BackupAdmin`  
 
-Comando PRUEBA:  
+Comando:  
 
 ```
 php artisan make:middleware BackupAdmin
 ```
 
-```php
-$hermano = "Agustin"
-
-```
 ![image](./img/make_backup_admin_middleware.png)  
 
 Esta es la ruta del archivo creado: `app\Http\Middleware\BackupAdmin.php` y el contenido por defecto del archivo es el siguiente:  
