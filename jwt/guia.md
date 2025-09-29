@@ -113,9 +113,217 @@ class User extends Authenticatable implements JWTSubject
 }
 ```
 
+## Configurar Auth guard
+
+Realizar estas configuraciones en **config/auth.php**  
+
+🖊️Cambié `web` por `api` en:  
+
+```
+    'defaults' => [
+        'guard' => env('AUTH_GUARD', 'api'),
+        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+    ],
+```
+
+y agregué:  
+
+```
+    'api' => [
+        'driver' => 'jwt',
+        'provider' => 'users',
+    ],
+```
+
+en:  
+
+```
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ],
+    ],
+```
+
+## Añadir algunas rutas de autenticación básicas
+
+Estas rutas se agregarán en `routes/api.php` 
+
+⚠️El archivo api.php ya tenía el siguiente código.
+
+```
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+```
+
+y las rutas que se suguiere agregarar son las siguientes (pendiente de comprobar si entra en conflicto con las líneas ya existentes):  
+```
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});
+```
+⏲️POR AHORA, yo he dejado el siguiente código:  
+
+```
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});
+```
+
+## Crear Authcontroller
+
+```
+php artisan make:controller AuthController
+```
+
+El cotenido original del controlador recien creado es:  
+
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class AuthController extends Controller
+{
+    //
+}
+```
+
+y finalmente, el contenido debe ser el siguiente:  
+
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\User;
+class AuthController extends Controller
+{
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login']]);
+    }
+
+    /**
+     * Get a JWT via given credentials.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login()
+    {
+        $credentials = request(['email', 'password']);
+
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->respondWithToken($token);
+    }
+
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function me()
+    {
+        return response()->json(auth()->user());
+    }
+
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        auth()->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+        return $this->respondWithToken(auth()->refresh());
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
+    }
+}
+
+```
 
 
 # Referencias  
 
-https://youtu.be/jqaAfWQYb0Y
-https://jwt-auth.readthedocs.io/en/develop/quick-start/
+https://youtu.be/jqaAfWQYb0Y  
+https://jwt-auth.readthedocs.io/en/develop/quick-start/  
+
+
