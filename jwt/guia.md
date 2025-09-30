@@ -313,17 +313,28 @@ Route::middleware('jwt.verified')->group(function(){
 
 ### D. Pruebe la ruta protegida sin enviar el token
 
-<img width="1540" height="892" alt="imagen" src="https://github.com/user-attachments/assets/12b0a0aa-ef70-4325-abc4-7210e91999dc" />
+<img width="1522" height="565" alt="imagen" src="https://github.com/user-attachments/assets/2541836a-e031-48aa-9266-9879a0873675" />
+
 
 ### E. Pruebe la ruta protegida enviando el token.
 
 ***Pegue el token***
 
-<img width="1545" height="368" alt="imagen" src="https://github.com/user-attachments/assets/5f9a141d-e37e-4d30-af7d-6f401ed7b2e5" />
+<img width="1538" height="385" alt="imagen" src="https://github.com/user-attachments/assets/f4398f13-3985-463a-966e-e47346f7bbf9" />
+
 
 ***Envíe la petición***  
-<img width="1523" height="558" alt="imagen" src="https://github.com/user-attachments/assets/cda9b53b-1ab5-47d3-a015-07eb7fb93524" />
+<img width="1501" height="566" alt="imagen" src="https://github.com/user-attachments/assets/0091f64f-8926-493f-915e-c2d3b5c19f5b" />
 
+### F. Probando la ruta protegida con un token expirado
+
+<img width="1510" height="543" alt="imagen" src="https://github.com/user-attachments/assets/5b5aa82b-2388-4f16-bc4f-b8cc12c616b8" />
+
+### G. Probando la ruta protegida con un token alterado
+
+<img width="1542" height="548" alt="imagen" src="https://github.com/user-attachments/assets/de1e6ce2-a2b6-4c6c-9460-545bcc5eda9f" />
+
+<hr />
 ⚠️SUBA TAMBIEN UNA CAPTURA DE PANTALLA DEL PROYECTO COMO EVIDENCIA
 
 <img width="1919" height="889" alt="imagen" src="https://github.com/user-attachments/assets/47513b41-d89b-407f-9082-04ee03f3024d" />
