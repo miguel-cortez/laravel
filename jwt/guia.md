@@ -185,10 +185,39 @@ class AuthController extends Controller
     }
 ```
 
-## Crear un controlador para demostar la protección de rutas
+## Crear un controlador para demostrar el uso de rutas protegidas
 
 ```
 php artisan make:controller UserController --model=User --api
+```
+
+## En la función index() del controlador UserController obtenga la lista de usuarios
+
+**Código fuente de la función index()**  
+
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+
+    public function index()
+    {
+        $users = User::all();
+        return response()->json($users);
+    }
+
+    // CÓDIGO OMITIDO
+}
+
 ```
 
 ## Crear un Middleware
@@ -203,7 +232,7 @@ php artisan make:middleware JwtMiddleware
 
 use Illuminate\Foundation\Application;
 // CODIGO OMITIDO
-use App\Http\Middleware\JwtMiddleware; // 🎈 LÍNEA AGREGADA
+use App\Http\Middleware\JwtMiddleware; // 💡 LÍNEA AGREGADA
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -213,29 +242,33 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     // CODIGO OMITIDO
 
-    // 🎈AGREGAR DESDE AQUÍ
+    // 💡AGREGAR DESDE AQUÍ
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias(['jwt.verified' => JwtMiddleware::class]);
     })
-    // 🎈 HASTA AQUÍ
+    // 💡 HASTA AQUÍ
     ->create();
 ```
 
-## Rutas no protegidas
+## Agregue las rutas en routes/api.php
+
+**Rutas no protegidas**  
 
 ```
 Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
-Route::get('users',[UserController::class,'index']); // BORRAR ESTA RUTA DESPUÉS DE PROTEGERLA CON EL MIDDLEWARE
+
+Route::get('users',[UserController::class,'index']); // 🔖 BORRAR ESTA RUTA DESPUÉS DE PROTEGERLA CON EL MIDDLEWARE
 ```
-## Crear una ruta protegida
+**Crear un grupo de rutas protegidas**  
+
+📚Nota. Puede incluir varias rutas que estarán protegidas con el mismo Middleware.
 
 ```
 Route::middleware('jwt.verified')->group(function(){
-    Route::get('users',[UserController::class,'index']);
+    Route::get('users',[UserController::class,'index']); // ESTA ES UNA RUTA PROTEGIDA
 });
 ```
-
 
 # Referencias  
 
