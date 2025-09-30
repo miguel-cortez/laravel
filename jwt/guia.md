@@ -108,7 +108,7 @@ class User extends Authenticatable implements JWTSubject
 
 ```
 
-# Crear el controlador
+# Crear el controlador AuthController
 
 ```
 php artisan make:controller AuthController
@@ -116,7 +116,7 @@ php artisan make:controller AuthController
 
 # Agregar la lógica de AuthController
 
-**Agregue la función register** para crear nuevos usuarios.
+Al controlador agregará dos funciones, register() para crear nuevos usuarios y login() para autenticar usuarios registrados.  
 ```
 <?php
 
@@ -124,9 +124,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator; // 💡LÍNEA AGREGADA
 class AuthController extends Controller
 {
+    // AQUÍ AGREGUE LAS FUNCIONES
+}
+```
+
+**Código fuente de la función register()**
+
+```
     public function register(Request $request){
         $validator = Validator::make($request->all(),
             [
@@ -150,11 +157,9 @@ class AuthController extends Controller
             return response()->json(["message"=>"SATISFACTORIO"],200);
         }
     }
-}
-
 ```
 
-**Además, agregue la función login() para autenticar usaurios ya registrados**  
+**Código fuente de la función login()**  
 
 ```
     public function login(Request $request){
