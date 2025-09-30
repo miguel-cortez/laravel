@@ -95,21 +95,10 @@ class User extends Authenticatable implements JWTSubject
     }
 
     // 💡 COMIENZA BLOQUE AGREGADO
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
     public function getJWTIdentifier()
     {
         return $this->getKey();
     }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
     public function getJWTCustomClaims()
     {
         return [];
@@ -127,6 +116,7 @@ php artisan make:controller AuthController
 
 # Agregar la lógica de AuthController
 
+**Agregue la función register** para crear nuevos usuarios.
 ```
 <?php
 
@@ -164,6 +154,32 @@ class AuthController extends Controller
 
 ```
 
+**Además, agregue la función login() para autenticar usaurios ya registrados**  
+
+```
+    public function login(Request $request){
+        $validator = Validator::make($request->all(),
+            [
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+            ]
+        );
+        if ($validator->stopOnFirstFailure()->fails()) {
+            return $validator->errors();
+        }else{
+            $credentials = $request->only('email','password');
+            try{
+                if(! $token = JWTAuth::attempt($credentials)){
+                    return response()->json(['error' => 'invalid credential'],401);
+                }
+            }catch(JWTException $e){
+                return response()->json(['error' => $e],500);
+            }
+            return response()->json(compact('token'));
+        }
+    }
+```
+
 ## Crear un controlador para demostar la protección de rutas
 
 ```
@@ -178,19 +194,11 @@ php artisan make:middleware JwtMiddleware
 
 ## Registrar el Middleware en bootstrap/app.php
 ```
-->withMiddleware(function (Middleware $middleware) {
-    $middleware->alias(['jwt.verified' => JwtMiddleware::class]);
-})
-```
-
-<details>
-```
 <?php
 
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\JwtMiddleware; // LINEA AGREGADA
+// CODIGO OMITIDO
+use App\Http\Middleware\JwtMiddleware; // 🎈 LÍNEA AGREGADA
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -198,18 +206,15 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        //
-    })
-    ->withExceptions(function (Exceptions $exceptions): void {
-        //
-    })
+    // CODIGO OMITIDO
+
+    // 🎈AGREGAR DESDE AQUÍ
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->alias(['jwt.verified' => JwtMiddleware::class]); // MIDDLEWARE AGREGADO
+        $middleware->alias(['jwt.verified' => JwtMiddleware::class]);
     })
+    // 🎈 HASTA AQUÍ
     ->create();
 ```
-</details>
 
 ## Rutas no protegidas
 
