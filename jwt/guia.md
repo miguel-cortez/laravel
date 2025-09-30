@@ -295,10 +295,6 @@ Route::middleware('jwt.verified')->group(function(){
 ```
 ## 13. Pruebas en Postman
 
-ℹ️**Thunder Client**, extensión de Visual Studio Code para hacer pruebas de rutas similar a **Postman**  
-
-<img width="1669" height="524" alt="imagen" src="https://github.com/user-attachments/assets/7d457a1b-afa4-4ee8-a02d-197f70a540c0" />
-
 ### A. Cree un nuevo usuario
 <img width="1506" height="709" alt="imagen" src="https://github.com/user-attachments/assets/cc15e65a-3780-4bc2-aaab-92e99fb43274" />
 
@@ -334,10 +330,11 @@ Route::middleware('jwt.verified')->group(function(){
 
 <img width="1542" height="548" alt="imagen" src="https://github.com/user-attachments/assets/de1e6ce2-a2b6-4c6c-9460-545bcc5eda9f" />
 
-<hr />
-⚠️SUBA TAMBIEN UNA CAPTURA DE PANTALLA DEL PROYECTO COMO EVIDENCIA
+## 🧰 Herramienta alternativa a Postman
 
-<img width="1919" height="889" alt="imagen" src="https://github.com/user-attachments/assets/47513b41-d89b-407f-9082-04ee03f3024d" />
+ℹ️**Thunder Client**, extensión de **Visual Studio Code** para hacer pruebas de rutas similar a **Postman**  
+
+<img width="1669" height="524" alt="imagen" src="https://github.com/user-attachments/assets/7d457a1b-afa4-4ee8-a02d-197f70a540c0" />
 
 # Referencias  
 
