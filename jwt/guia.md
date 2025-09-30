@@ -164,9 +164,23 @@ class AuthController extends Controller
 
 ```
 
+## Crear un controlador para demostar la protección de rutas
 
+```
+php artisan make:controller UserController --model=User --api
+```
 
+## Crear un Middleware
 
+```
+php artisan make:middleware JwtMiddleware
+```
+
+## Registrar el Middleware en el Kernel
+
+```
+
+```
 
 *******************************************************************
 
