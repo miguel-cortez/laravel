@@ -213,7 +213,11 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Tymon\JWTAuth\Facades\JWTAuth; // 💡 LINEA AGREGADA
+use Tymon\JWTAuth\Facades\JWTAuth; // 💡LINEA AGREGADA
+use Tymon\JWTAuth\Exceptions\JWTException; // 💡LÍNEA AGREGADA
+use Tymon\JWTAuth\Exceptions\TokenExpiredException; // 💡 LÍNEA AGREGADA
+use Tymon\JWTAuth\Exceptions\TokenInvalidException; // 💡 LÍNEA AGREGADA
+
 class JwtMiddleware
 {
     /**
@@ -223,19 +227,20 @@ class JwtMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // 💡INICIA BLOQUE AGREGADO
-        try{
-            JWTAuth::parseToken()->authenticate(); // 🔑 ESTE ES EL PROCESO DE AUTENTICACIÓN
-        }catch(Exception $e){
-            if($e instanceof TokenInvalidException){
-                return response()->json(['status'=>'invalid token'],401);
-            }
-            if($e instanceof TokenExpiredException){
-                return response()->json(['status'=>'expired token'],401);
-            }
-            return response()->json(['status'=>'token not found'],401);
+        // 💡INICIA LA LÓGICA AGREGADA AL MIDDLEWARE
+        if (!JWTAuth::getToken()) {
+            return response()->json(['status' => 'token not provided'], 401);
         }
-        // 💡FINALIZA BLOQUE AGREGADO
+        try {
+            JWTAuth::parseToken()->authenticate();
+        }catch(TokenInvalidException $e) {
+            return response()->json(['status' => 'invalid token'], 401);
+        }catch (TokenExpiredException $e) {
+            return response()->json(['status' => 'expired token'], 401);
+        } catch (JWTException $e) {
+            return response()->json(['status' => 'token error'], 401);
+        }
+        // 💡FINALIZA LA LÓGICA AGREGADA AL MIDDLEWARE
         return $next($request);
     }
 }
