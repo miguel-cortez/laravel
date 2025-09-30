@@ -236,7 +236,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Tymon\JWTAuth\Facades\JWTAuth; // LINEA AGREGADA
+use Tymon\JWTAuth\Facades\JWTAuth; // 💡 LINEA AGREGADA
 class JwtMiddleware
 {
     /**
@@ -246,8 +246,9 @@ class JwtMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // 💡INICIA BLOQUE AGREGADO
         try{
-            JWTAuth::parseToken()->authenticate(); // ESTE ES EL PROCESO DE AUTENTICACIÓN
+            JWTAuth::parseToken()->authenticate(); // 🔑 ESTE ES EL PROCESO DE AUTENTICACIÓN
         }catch(Exception $e){
             if($e instanceof TokenInvalidException){
                 return response()->json(['status'=>'invalid token'],401);
@@ -257,6 +258,7 @@ class JwtMiddleware
             }
             return response()->json(['status'=>'token not found'],401);
         }
+        // 💡FINALIZA BLOQUE AGREGADO
         return $next($request);
     }
 }
