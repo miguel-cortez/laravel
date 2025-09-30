@@ -44,37 +44,6 @@ jwt-auth secret [**Yn2uTgg40nqfQn6HDk4ecbTWcJ...I588Y9ZHUkKkXV9UsqBl**] set succ
 ## Actualizar Models\User
 
 ```
-use Tymon\JWTAuth\Contracts\JWTSubject;
-```
-
-**Se deben implementar los siguientes dos métodos:**  
-
-```
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
-```
-
-El modelo **User** lucirá como el siguiente código:  
-
-```
 <?php
 
 namespace App\Models;
@@ -154,6 +123,44 @@ class User extends Authenticatable implements JWTSubject
 
 ```
 php artisan make:controller AuthController
+```
+
+# Agregar la lógica de AuthController
+
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+class AuthController extends Controller
+{
+    public function register(Request $request){
+        $validator = Validator::make($request->all(),
+            [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|max:6'
+            ]
+        );
+        if ($validator->stopOnFirstFailure()->fails()) {
+            $errors = $validator->errors();
+            if($errors->has("name")){
+                return response()->json(["message"=>"El nombre no cumple los requerientos"],401);
+            }
+            else if($errors->has("email")){
+                return response()->json(["message"=>"El email no cumple los requerientos"],401);
+            }
+            if($errors->has("password")){
+                return response()->json(["message"=>"El password no cumple los requerientos"],401);
+            }
+        }else{
+            return response()->json(["message"=>"SATISFACTORIO"],200);
+        }
+    }
+}
 ```
 
 
