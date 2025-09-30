@@ -267,6 +267,14 @@ return Application::configure(basePath: dirname(__DIR__))
 
 ## Agregue las rutas en routes/api.php
 
+**En la parte superior de api.php**  
+
+```
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\JwtMiddleware;
+```
+
 **Rutas no protegidas**  
 
 ```
