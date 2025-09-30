@@ -307,6 +307,37 @@ Route::middleware('jwt.verified')->group(function(){
     Route::get('users',[UserController::class,'index']); // ESTA ES UNA RUTA PROTEGIDA
 });
 ```
+## Pruebas en Postman
+
+### 1. Cree un nuevo usuario
+<img width="1506" height="709" alt="imagen" src="https://github.com/user-attachments/assets/cc15e65a-3780-4bc2-aaab-92e99fb43274" />
+
+### 2. Autentique el usuario previamente registrado.  
+
+<img width="1526" height="577" alt="imagen" src="https://github.com/user-attachments/assets/fe1bd92f-fd27-4fd4-8e0b-b8fac30c85d9" />
+
+ℹ️Copie el token para usarlo más tarde.
+
+### 3. Pruebe la ruta protegida sin enviar el token
+
+<img width="1487" height="826" alt="imagen" src="https://github.com/user-attachments/assets/1d1eb248-7fa9-437b-8f23-79ebe86e13d8" />
+
+### 4. Pruebe la ruta protegida enviando el token.
+
+***Pegue el token***
+
+<img width="1545" height="368" alt="imagen" src="https://github.com/user-attachments/assets/5f9a141d-e37e-4d30-af7d-6f401ed7b2e5" />
+
+***Envíe la petición***  
+<img width="1523" height="558" alt="imagen" src="https://github.com/user-attachments/assets/cda9b53b-1ab5-47d3-a015-07eb7fb93524" />
+
+
+
+
+
+
+
+
 
 # Referencias  
 
