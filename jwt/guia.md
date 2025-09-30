@@ -1,5 +1,3 @@
-🪲DOCUMENTACIÓN EN PROCESO
-
 # Protección de rutas API con JWT
 
 ## Creación del proyecto.
