@@ -13,13 +13,6 @@ php artisan install:api
 
 ## 3. Instalación de paquete de JWT para Laravel
 
-[Referencia](https://jwt-auth.readthedocs.io/en/develop/laravel-installation/)
-
-ℹ️**Thunder Client**, extensión de Visual Studio Code para hacer pruebas de rutas similar a **Postman**  
-
-<img width="1669" height="524" alt="imagen" src="https://github.com/user-attachments/assets/7d457a1b-afa4-4ee8-a02d-197f70a540c0" />
-
-
 ```
 composer require tymon/jwt-auth
 ```
@@ -301,6 +294,10 @@ Route::middleware('jwt.verified')->group(function(){
 });
 ```
 ## 13. Pruebas en Postman
+
+ℹ️**Thunder Client**, extensión de Visual Studio Code para hacer pruebas de rutas similar a **Postman**  
+
+<img width="1669" height="524" alt="imagen" src="https://github.com/user-attachments/assets/7d457a1b-afa4-4ee8-a02d-197f70a540c0" />
 
 ### A. Cree un nuevo usuario
 <img width="1506" height="709" alt="imagen" src="https://github.com/user-attachments/assets/cc15e65a-3780-4bc2-aaab-92e99fb43274" />
