@@ -79,17 +79,53 @@ El modelo **User** lucirá como el siguiente código:
 
 namespace App\Models;
 
-// UNA LÍNEA OMITIDA
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Tymon\JWTAuth\Contracts\JWTSubject; // 💡 LINEA AGREGADA
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
-
-// CÓDIGO OMITIDO
-
+// 💡 EN LA SIGUIENTE LINEA, se agregó implements JWTSubject
 class User extends Authenticatable implements JWTSubject
 {
+    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasFactory, Notifiable;
 
-    // CÓDIGO OMITIDO
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    // 💡 COMIENZA BLOQUE AGREGADO
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -109,11 +145,24 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
+    // 💡 FINALIZA BLOQUE AGREGADO
 }
+
 ```
 
-## Configurar Auth guard
+# Crear el controlador
+
+```
+php artisan make:controller AuthController
+```
+
+
+
+
+
+*******************************************************************
+
+## Configurar Auth guard  NOOOOOOOOOOOOOOOOOOOOOOOO
 
 Realizar estas configuraciones en **config/auth.php**  
 
@@ -150,7 +199,7 @@ en:
     ],
 ```
 
-## Añadir algunas rutas de autenticación básicas
+## Añadir algunas rutas de autenticación básicas    NOOOOOOOOOOOOOOOOOOOOOOOOOO (SI PERO DESPUES)
 
 Estas rutas se agregarán en `routes/api.php` 
 
@@ -210,7 +259,7 @@ Route::group([
 });
 ```
 
-## Crear Authcontroller
+## Crear Authcontroller      NOOOOOOOOOOOOOOOOOOOOOOOOOO (SI PERO REVISAR LUEGO DE FUNCIONAL)
 
 ```
 php artisan make:controller AuthController
