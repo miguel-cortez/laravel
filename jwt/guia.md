@@ -296,7 +296,7 @@ return Application::configure(basePath: dirname(__DIR__))
 Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 
-Route::get('users',[UserController::class,'index']); // 🔖 BORRAR ESTA RUTA DESPUÉS DE PROTEGERLA CON EL MIDDLEWARE
+Route::get('users',[UserController::class,'index']); // 🔖 PRUEBE OBTENER LA LISTA DE USUARIOS CON ESTA RUTA DESPROTEGIDA. LUEGO, CUANDO LA PROTEGA CON EL MIDDLEWARE BORRE ESTA LÍNEA.  
 ```
 **Crear un grupo de rutas protegidas**  
 
