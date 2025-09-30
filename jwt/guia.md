@@ -1,17 +1,17 @@
 # Protección de rutas API con JWT
 
-## Creación del proyecto.
+## 1. Creación del proyecto.
 ```
 composer create-project laravel/laravel example-jwt-laravel-12
 ```
 
-## Habilitar rutas API
+## 2. Habilitar rutas API
 
 ```
 php artisan install:api
 ```
 
-## Instalación de paquete de JWT para Laravel
+## 3. Instalación de paquete de JWT para Laravel
 
 [Referencia](https://jwt-auth.readthedocs.io/en/develop/laravel-installation/)
 
@@ -21,7 +21,7 @@ php artisan install:api
 composer require tymon/jwt-auth
 ```
 
-## Registrar el proveedor
+## 4. Registrar el proveedor
 
 ```
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
@@ -29,7 +29,7 @@ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServicePro
 
 Ahora debe existir el siguiente archivo: `config/jwt.php` 
 
-## Generando una clave secreta
+## 5. Generando una clave secreta
 
 ```
 php artisan jwt:secret
@@ -39,7 +39,7 @@ Esto agrega una clave secreta en el archivo `.env` y muesta la clave en la termi
 
 jwt-auth secret [**Yn2uTgg40nqfQn6HDk4ecbTWcJ...I588Y9ZHUkKkXV9UsqBl**] set successfully.  
 
-## Actualizar Models\User
+## 5. Actualizar Models\User
 
 ```
 <?php
@@ -82,13 +82,13 @@ class User extends Authenticatable implements JWTSubject
 
 ```
 
-# Crear el controlador AuthController
+# 6. Crear el controlador AuthController
 
 ```
 php artisan make:controller AuthController
 ```
 
-# Agregar la lógica de AuthController
+# 7. Agregar la lógica de AuthController
 
 Al controlador agregará dos funciones, register() para crear nuevos usuarios y login() para autenticar usuarios registrados.  
 ```
@@ -162,7 +162,7 @@ class AuthController extends Controller
     }
 ```
 
-## Crear un controlador para demostrar el uso de rutas protegidas
+## 8. Crear un controlador para demostrar el uso de rutas protegidas
 
 ```
 php artisan make:controller UserController --model=User --api
@@ -197,13 +197,13 @@ class UserController extends Controller
 
 ```
 
-## Crear un Middleware
+## 9. Crear un Middleware
 
 ```
 php artisan make:middleware JwtMiddleware
 ```
 
-## Programe el Middleware
+## 10. Programe el Middleware
 
 ```
 <?php
@@ -241,7 +241,7 @@ class JwtMiddleware
 }
 ```
 
-## Registrar el Middleware en bootstrap/app.php
+## 11. Registrar el Middleware en bootstrap/app.php
 ```
 <?php
 
@@ -265,7 +265,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->create();
 ```
 
-## Agregue las rutas en routes/api.php
+## 12. Agregue las rutas en routes/api.php
 
 **En la parte superior de api.php**  
 
@@ -292,25 +292,25 @@ Route::middleware('jwt.verified')->group(function(){
     Route::get('users',[UserController::class,'index']); // ESTA ES UNA RUTA PROTEGIDA
 });
 ```
-## Pruebas en Postman
+## 13. Pruebas en Postman
 
-### 1. Cree un nuevo usuario
+### A. Cree un nuevo usuario
 <img width="1506" height="709" alt="imagen" src="https://github.com/user-attachments/assets/cc15e65a-3780-4bc2-aaab-92e99fb43274" />
 
-### 2. Prueba la ruta sin protección.  
+### B. Prueba la ruta sin protección.  
 <img width="1491" height="582" alt="imagen" src="https://github.com/user-attachments/assets/c7d6d543-1c5e-42d1-9541-7567df5d62c6" />
 
-### 3. Autentique el usuario previamente registrado.  
+### C. Autentique el usuario previamente registrado.  
 
 <img width="1526" height="577" alt="imagen" src="https://github.com/user-attachments/assets/fe1bd92f-fd27-4fd4-8e0b-b8fac30c85d9" />
 
 ℹ️Copie el token para usarlo más tarde.
 
-### 4. Pruebe la ruta protegida sin enviar el token
+### D. Pruebe la ruta protegida sin enviar el token
 
 <img width="1487" height="826" alt="imagen" src="https://github.com/user-attachments/assets/1d1eb248-7fa9-437b-8f23-79ebe86e13d8" />
 
-### 5. Pruebe la ruta protegida enviando el token.
+### E. Pruebe la ruta protegida enviando el token.
 
 ***Pegue el token***
 
@@ -322,7 +322,6 @@ Route::middleware('jwt.verified')->group(function(){
 ⚠️SUBA TAMBIEN UNA CAPTURA DE PANTALLA DEL PROYECTO COMO EVIDENCIA
 
 <img width="1919" height="889" alt="imagen" src="https://github.com/user-attachments/assets/47513b41-d89b-407f-9082-04ee03f3024d" />
-
 
 # Referencias  
 
