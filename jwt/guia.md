@@ -15,7 +15,10 @@ php artisan install:api
 
 [Referencia](https://jwt-auth.readthedocs.io/en/develop/laravel-installation/)
 
-ℹ️**Thunder Client**, extensión de Visual Studio Code para hacer pruebas de rutas simila a **Postman**
+ℹ️**Thunder Client**, extensión de Visual Studio Code para hacer pruebas de rutas similar a **Postman**  
+
+<img width="1669" height="524" alt="imagen" src="https://github.com/user-attachments/assets/7d457a1b-afa4-4ee8-a02d-197f70a540c0" />
+
 
 ```
 composer require tymon/jwt-auth
