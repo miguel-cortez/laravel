@@ -323,8 +323,9 @@ class AuthController extends Controller
 
 # Referencias  
 
-https://youtu.be/p7tGYsVQV48
+https://youtu.be/p7tGYsVQV48  
 https://youtu.be/jqaAfWQYb0Y  
 https://jwt-auth.readthedocs.io/en/develop/quick-start/  
+
 
 
