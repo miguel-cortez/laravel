@@ -184,6 +184,7 @@ php artisan make:middleware JwtMiddleware
 ```
 
 <details>
+```
 <?php
 
 use Illuminate\Foundation\Application;
@@ -207,6 +208,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias(['jwt.verified' => JwtMiddleware::class]); // MIDDLEWARE AGREGADO
     })
     ->create();
+```
 </details>
 
 ## Rutas no protegidas
