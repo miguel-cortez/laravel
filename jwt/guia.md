@@ -286,12 +286,11 @@ Route::middleware('jwt.verified')->group(function(){
 ```
 ## Pruebas en Postman
 
-### 1. Prueba la ruta sin protección.  
-
-<img width="1491" height="582" alt="imagen" src="https://github.com/user-attachments/assets/c7d6d543-1c5e-42d1-9541-7567df5d62c6" />
-
-### 2. Cree un nuevo usuario
+### 1. Cree un nuevo usuario
 <img width="1506" height="709" alt="imagen" src="https://github.com/user-attachments/assets/cc15e65a-3780-4bc2-aaab-92e99fb43274" />
+
+### 2. Prueba la ruta sin protección.  
+<img width="1491" height="582" alt="imagen" src="https://github.com/user-attachments/assets/c7d6d543-1c5e-42d1-9541-7567df5d62c6" />
 
 ### 3. Autentique el usuario previamente registrado.  
 
