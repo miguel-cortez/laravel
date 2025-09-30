@@ -137,22 +137,25 @@ class AuthController extends Controller
             [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|max:6'
+            'password' => 'required|min:6'
             ]
         );
         if ($validator->stopOnFirstFailure()->fails()) {
-            $errors = $validator->errors();
-            if($errors->has("name")){
-                return response()->json(["message"=>"El nombre no cumple los requerientos"],401);
-            }
-            else if($errors->has("email")){
-                return response()->json(["message"=>"El email no cumple los requerientos"],401);
-            }
-            if($errors->has("password")){
-                return response()->json(["message"=>"El password no cumple los requerientos"],401);
-            }
+            return $validator->errors();
         }else{
-            return response()->json(["message"=>"SATISFACTORIO"],200);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+
+            $token = JWTAuth::fromUser($user);
+
+            return response()->json(
+                [
+                'user'=>$user,
+                "token" => $token
+                ],201);
         }
     }
 ```
