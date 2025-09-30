@@ -308,7 +308,7 @@ Route::middleware('jwt.verified')->group(function(){
 
 ### D. Pruebe la ruta protegida sin enviar el token
 
-<img width="1487" height="826" alt="imagen" src="https://github.com/user-attachments/assets/1d1eb248-7fa9-437b-8f23-79ebe86e13d8" />
+<img width="1540" height="892" alt="imagen" src="https://github.com/user-attachments/assets/12b0a0aa-ef70-4325-abc4-7210e91999dc" />
 
 ### E. Pruebe la ruta protegida enviando el token.
 
