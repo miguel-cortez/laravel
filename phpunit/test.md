@@ -29,3 +29,5 @@ Como solo se tiene la clase **ExampleTest** solo se prueaba la función definida
 php artisan test
 ```
 <img width="509" height="325" alt="imagen" src="https://github.com/user-attachments/assets/802aafb9-d3fa-4155-82e3-25c069cd953c" />
+
+<img width="787" height="134" alt="imagen" src="https://github.com/user-attachments/assets/44da1cb9-7973-4a4a-a482-c52c63a03af6" />
