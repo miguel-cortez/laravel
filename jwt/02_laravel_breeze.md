@@ -240,12 +240,38 @@ class AuthenticatedSessionController extends Controller
     }
 }
 ```
-## Para que no encripte
 
+## 9. Modifique el archivo app/Http/Controllers/AuthController.php
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator; // LINEA AGREGADA
+use Illuminate\Support\Facades\Hash; // LINEA AGREGADA
+use App\Models\User; // LINEA AGREGADA
+use Tymon\JWTAuth\Facades\JWTAuth; // LINEA AGREGADA
+use Illuminate\Support\Facades\Auth;
+class AuthController extends Controller
+{
+    // CÓDIGO OMITIDO
+
+    // 💡 FUNCION AGREGADA
+    public function getToken(){
+        return request()->cookie('token');
+    }
+}
 ```
-vendor\laravel\framework\src\Illuminate\Cookie\Middleware\EncryptCookies.php
+## 10. Agregue una ruta a routes/api
+
+```php
+Route::get('gettoken',[AuthController::class,'getToken']);
 ```
-Modificar en:
-```
-protected $except = ['token', ];
-```
+## 11. Configure para que la cookie token no se encripte
+
+Modique el archivo ***vendor\laravel\framework\src\Illuminate\Cookie\Middleware\EncryptCookies.php***  
+
+Cambie `protected $except = [];` por `protected $except = ['token', ];` 
