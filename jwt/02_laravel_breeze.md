@@ -20,6 +20,10 @@ Ejecute los pasos **1** y **2** de la guía [CONFIGURACIÓN DE VUE3](https://git
 - Las tres líneas correspondientes a **Alpine** se podrían borrar sin problemas para este ejemplo, sin embargo, no permite cargar información en {{ $slot }} de una vista de laravel-breeze (con blade). En conlusión, no borre estas líneas.
 - El bloque de código agregado, crea la aplicación de **Vue3**, configura **axios**, agrega las **rutas** para componentes de **vue-router** y lanza la aplicación de **Vue3**  
 
+<img width="1379" height="306" alt="imagen" src="https://github.com/user-attachments/assets/11b0ca60-6bc6-4a1e-8540-ef1e999b6e5d" />
+
+
+
 ```Javascript
 import './bootstrap';
 
