@@ -117,6 +117,27 @@ const search = computed({
   </label>
 </template>
 ```
+
+## 7. Modifique el archivo resources/views/layouts/app.blade.php
+```html
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+    // CÓDIGO OMITIDO
+    </head>
+    <body class="font-sans antialiased">
+
+          // CÓDIGO OMITIDO
+
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+                <div id="app"></div> // 💡LÍNEA AGREGADA
+            </main>
+        </div>
+    </body>
+</html>
+```
 ## Para que no encripte
 
 ```
