@@ -58,7 +58,7 @@ const router = createRouter({
 
 export default router
 ```
-## 5. Agregue el archivo resources/js/components/js/App.vue
+## 5. Agregue el archivo resources/js/components/App.vue
 ```Javascript
 <template>
   <h1>Hello App!</h1>
