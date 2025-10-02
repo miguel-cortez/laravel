@@ -234,7 +234,7 @@ const search = computed({
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}  // 👉 PARA DESPLICAR INFORMACIÓN FUERA DEL CONTEXTO DE VUE3 (YA EXPLICADO)
+                {{ $slot }}  // 👈 PARA DESPLEGAR INFORMACIÓN FUERA DEL CONTEXTO DE VUE3 (YA EXPLICADO)
                 <div id="app"></div> // 💡LÍNEA AGREGADA PARA CARGAR LA APLICACION DE VUE3
             </main>
         </div>
