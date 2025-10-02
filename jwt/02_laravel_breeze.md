@@ -114,7 +114,7 @@ export default router
 ```
 ## 5. Agregue el archivo resources/js/components/App.vue
 
-⚡Este es el componente principal de la aplicación de **Vue3**  
+⚡Este es el componente principal de la aplicación de **Vue3**. La carpeta 📁**components** no existe y debe ser creada.    
 
 ```Javascript
 <template>
@@ -234,7 +234,7 @@ const search = computed({
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}  // 👈 ESTE ES ELEMENTO DEL CUAL ARRIBA COMENTÉ (DONDE SE CARGA POR EJEMPLO EL PERFIL DEL USUARIO).
+                {{ $slot }}  // 👉 PARA DESPLICAR INFORMACIÓN FUERA DEL CONTEXTO DE VUE3 (YA EXPLICADO)
                 <div id="app"></div> // 💡LÍNEA AGREGADA PARA CARGAR LA APLICACION DE VUE3
             </main>
         </div>
