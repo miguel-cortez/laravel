@@ -8,10 +8,10 @@
 
 ## 1. Instale el paquete laravel-breeze
 
-Ejecute los pasos del **1** al **5** de la guía [https://github.com/miguel-cortez/laravel/blob/master/proyecto_laravel_12/03_laravel_breeze.md](https://github.com/miguel-cortez/laravel/blob/master/proyecto_laravel_12/03_laravel_breeze.md)  
+Ejecute los pasos del **1** al **5** de la guía [LARAVEL/BREEZE](https://github.com/miguel-cortez/laravel/blob/master/proyecto_laravel_12/03_laravel_breeze.md)  
 
 ## 2. Configure Vue3
-Ejecute los pasos **1** y **2** de la guía [https://github.com/miguel-cortez/laravel/blob/master/proyecto_laravel_12/04_vue3.md](https://github.com/miguel-cortez/laravel/blob/master/proyecto_laravel_12/04_vue3.md)  
+Ejecute los pasos **1** y **2** de la guía [CONFIGURACIÓN DE VUE3](https://github.com/miguel-cortez/laravel/blob/master/proyecto_laravel_12/04_vue3.md)  
 
 ## 3. Modifique el archivo resources/js/app.js
 
