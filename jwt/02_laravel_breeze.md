@@ -63,16 +63,21 @@ export default router
 <template>
   <h1>Hello App!</h1>
   <p><strong>Current route path:</strong>{{ $route.fullPath }} </p>
-  token: {{ tk }}
+  
+  <div style="margin:10px;border:1px solid gray;padding: 10px;overflow: scroll;">token: {{ tk }}</div>
+  <br />
+  <nav>
+    <RouterLink to="/" style="margin:10px;border:1px solid gray;padding: 10px;">Go to Home</RouterLink>
+    <RouterLink to="/about" style="margin:10px;border:1px solid gray;padding: 10px;">Go to About</RouterLink>
+  </nav>
+  <br />
 
-<button @click="getUsers">
+  <button @click="getUsers" style="margin:10px;border:1px solid gray;padding: 10px;">
   Leer usuarios
 </button>
+<br />
+<div style="margin:10px;border:1px solid gray;padding: 10px;">Usuarios: {{ users }}</div>
 
-  <nav>
-    <RouterLink to="/" class="color:purple">Go to Home</RouterLink>
-    <RouterLink to="/about">Go to About</RouterLink>
-  </nav>
   <main>
     <RouterView />
   </main>
@@ -80,6 +85,7 @@ export default router
 <script setup>
 import { ref, onMounted } from 'vue'
 const tk = ref('')
+const users = ref([])
 onMounted(() => {
   getToken()
 })
@@ -99,7 +105,7 @@ const getUsers = async () => {
                 Authorization: `Bearer ${tk.value}`
             }
     });
-    console.log(response.data)
+    users.value = response.data
   } catch (err) {
     console.error(err);
   }
