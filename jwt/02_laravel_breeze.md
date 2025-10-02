@@ -63,6 +63,12 @@ export default router
 <template>
   <h1>Hello App!</h1>
   <p><strong>Current route path:</strong>{{ $route.fullPath }} </p>
+  token: {{ tk }}
+
+<button @click="getUsers">
+  Leer usuarios
+</button>
+
   <nav>
     <RouterLink to="/" class="color:purple">Go to Home</RouterLink>
     <RouterLink to="/about">Go to About</RouterLink>
@@ -71,6 +77,34 @@ export default router
     <RouterView />
   </main>
 </template>
+<script setup>
+import { ref, onMounted } from 'vue'
+const tk = ref('')
+onMounted(() => {
+  getToken()
+})
+const getToken = async () => {
+  try {
+    const response = await axios.get("/api/gettoken");
+    tk.value = response.data.trim()
+    console.log("tk=" + tk.value)
+  } catch (err) {
+    console.error(err);
+  }
+};
+const getUsers = async () => {
+  try {
+    const response = await axios.get("/api/users",{
+            headers: {
+                Authorization: `Bearer ${tk.value}`
+            }
+    });
+    console.log(response.data)
+  } catch (err) {
+    console.error(err);
+  }
+};
+</script>
 ```
 
 ## 6. Agregue el archivo resources/components/HomeView.vue
