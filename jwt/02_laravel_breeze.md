@@ -271,7 +271,7 @@ class AuthController extends Controller
     }
 }
 ```
-## 10. Agregue una ruta a routes/api
+## 10. Agregue una ruta a routes/api.php
 
 ```php
 Route::get('gettoken',[AuthController::class,'getToken']);
