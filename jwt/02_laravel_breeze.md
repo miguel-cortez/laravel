@@ -245,9 +245,61 @@ const search = computed({
 
 <img width="1070" height="614" alt="imagen" src="https://github.com/user-attachments/assets/68fb43b8-9ab8-4346-acec-a2c31ae3d5f6" />
 
+## 8. Modifique el archivo app/Http/Controllers/Auth/RegisteredUserController.php
 
+```
+<?php
 
-## 8. Modifique el archivo app/Http/Controllers/Auth/AuthenticatedSessionController.php
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+// ✂️CÓDIGO OMITIDO
+use Illuminate\Support\Facades\Cookie; // 💡 LÍNEA AGREGADA PARA TRABAJAR CON COOKIES
+use Tymon\JWTAuth\Facades\JWTAuth; // 💡LINEA AGREGADA PARA TRABAJAR CON JWT.
+class RegisteredUserController extends Controller
+{
+    // ✂️CÓDIGO OMITIDO
+    public function store(Request $request): RedirectResponse
+    {
+        // ✂️CÓDIGO OMITIDO
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        // 💡 INICIA LINEAS AGREGADAS POR MACV
+        $user = Auth::user(); // Obtener la información del usuario autenticado
+                              // Alternativa $user = $request->user();
+        $token = JWTAuth::fromUser($user); // para generar el token
+
+        // Crear cookie con HttpOnly activado
+        Cookie::queue(cookie(
+            'token',    // Nombre de variable en cookie
+            $token,     // Valor de la variable
+            2,          // duración en minutos
+            '/',        // ruta
+            null,       // dominio específico
+            true,       // secure (HTTPS)
+            true        // httpOnly (🔒) para que no se pueda leer con JavaScript
+        ));
+        // 💡 FINALIZA LINEAS AGREGADAS POR MACV
+
+        return redirect(route('dashboard', absolute: false));
+    }
+}
+```
+
+📚**Nota**. Genera el token y lo almacena en una cookie con nombre **token** justo después de que un usuario se registre. Luego de registrarse, el usuario es redirigido al **dashboard** y en este caso ya tendrá disponible el **token**.  
+
+<img width="478" height="521" alt="imagen" src="https://github.com/user-attachments/assets/dddcd2d3-d88d-454c-8e05-f1926bdb3b6c" />
+
+## 9. Modifique el archivo app/Http/Controllers/Auth/AuthenticatedSessionController.php
 
 ```php
 <?php
@@ -315,7 +367,13 @@ class AuthenticatedSessionController extends Controller
 }
 ```
 
-## 9. Modifique el archivo app/Http/Controllers/AuthController.php
+
+📚**Nota**. Genera el token y lo almacena en una cookie con nombre **token** justo después de iniciar sesión. Luego de iniciar sesión, el usuario es redirigido al **dashboard** y en este caso ya tendrá disponible el **token**.  
+
+<img width="486" height="401" alt="imagen" src="https://github.com/user-attachments/assets/f64f6722-9ad1-49fd-bcea-871e2ae13b00" />
+
+
+## 10. Modifique el archivo app/Http/Controllers/AuthController.php
 
 ```php
 <?php
@@ -339,12 +397,12 @@ class AuthController extends Controller
     }
 }
 ```
-## 10. Agregue una ruta a routes/api.php
+## 11. Agregue una ruta a routes/api.php
 
 ```php
 Route::get('gettoken',[AuthController::class,'getToken']);
 ```
-## 11. Configure para que la cookie token no se encripte
+## 12. Configure para que la cookie token no se encripte
 
 Modique el archivo ***vendor\laravel\framework\src\Illuminate\Cookie\Middleware\EncryptCookies.php***  
 
