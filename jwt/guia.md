@@ -87,6 +87,8 @@ php artisan make:controller AuthController
 # 7. Agregar la lógica de AuthController
 
 Al controlador agregará dos funciones, register() para crear nuevos usuarios y login() para autenticar usuarios registrados.  
+
+**Agregue las líneas que se indican a continuación**  
 ```
 <?php
 
@@ -94,11 +96,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator; // LINEA AGREGADA
-use Illuminate\Support\Facades\Hash; // LINEA AGREGADA
-use App\Models\User; // LINEA AGREGADA
-use Tymon\JWTAuth\Facades\JWTAuth; // LINEA AGREGADA
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator; // 💡 LINEA AGREGADA
+use Illuminate\Support\Facades\Hash; // 💡 LINEA AGREGADA
+use App\Models\User; // 💡 LINEA AGREGADA
+use Tymon\JWTAuth\Facades\JWTAuth; // 💡 LINEA AGREGADA
+use Illuminate\Support\Facades\Auth; // 💡 LINEA AGREGADA
 class AuthController extends Controller
 {
     // AQUÍ AGREGUE LAS FUNCIONES
