@@ -103,7 +103,7 @@ use Tymon\JWTAuth\Facades\JWTAuth; // 💡 LINEA AGREGADA
 use Illuminate\Support\Facades\Auth; // 💡 LINEA AGREGADA
 class AuthController extends Controller
 {
-    // AQUÍ AGREGUE LAS FUNCIONES
+    // 👉 AQUÍ AGREGUE LAS FUNCIONES
 }
 ```
 
