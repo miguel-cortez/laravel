@@ -172,6 +172,74 @@ const search = computed({
     </body>
 </html>
 ```
+
+## 8. Modifique el archivo app/Http/Controllers/Auth/AuthenticatedSessionController.php
+
+```php
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
+use Illuminate\Support\Facades\Cookie; // 💡 LÍNEA AGREGADA PARA TRABAJAR CON COOKIES
+use Tymon\JWTAuth\Facades\JWTAuth; // 💡LINEA AGREGADA PARA TRABAJAR CON JWT.
+class AuthenticatedSessionController extends Controller
+{
+    /**
+     * Display the login view.
+     */
+    public function create(): View
+    {
+        return view('auth.login');
+    }
+
+    /**
+     * Handle an incoming authentication request.
+     */
+    public function store(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        // 💡 INICIA LINEAS AGREGADAS POR MACV
+        $user = Auth::user(); // Obtener la información del usuario autenticado
+        $token = JWTAuth::fromUser($user); // para generar el token
+
+        // Crear cookie con HttpOnly activado
+        Cookie::queue(cookie(
+            'token',    // Nombre de variable en cookie
+            $token,     // Valor de la variable
+            2,          // duración en minutos
+            '/',        // ruta
+            null,       // dominio específico
+            true,       // secure (HTTPS)
+            true        // httpOnly (🔒) para que no se pueda leer con JavaScript
+        ));
+        // 💡 FINALIZA LINEAS AGREGADAS POR MACV
+        return redirect()->intended(route('dashboard', absolute: false));
+    }
+
+    /**
+     * Destroy an authenticated session.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+}
+```
 ## Para que no encripte
 
 ```
