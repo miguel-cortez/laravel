@@ -39,6 +39,26 @@ app.mount('#app')
 // 💡FINALIZA BLOQUE AGREGADO
 ```
 
+## 4. Agregue el archivo resources/router.js
+```Javascript
+import { createMemoryHistory, createRouter } from 'vue-router'
+
+import HomeView from './components/HomeView.vue'
+import AboutView from './components/AboutView.vue'
+
+const routes = [
+  { path: '/', component: HomeView },
+  { path: '/about', component: AboutView },
+]
+
+const router = createRouter({
+  history: createMemoryHistory(),
+  routes,
+})
+
+export default router
+```
+
 ## Para que no encripte
 
 ```
