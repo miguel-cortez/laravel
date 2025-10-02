@@ -15,13 +15,15 @@ Ejecute los pasos **1** y **2** de la guía [CONFIGURACIÓN DE VUE3](https://git
 
 ## 3. Modifique el archivo resources/js/app.js
 
+📖 ***Notas***.  
+- El archivo **app.js** importa el archivo **bootstrap.js** y también importa **alpinejs** que se encuentra en **node_modules/alpinejs/**. Se puede instalar con **npm install alpinejs** o ya viene instalado con algún paquete como **laravel-breeze**, **Laravel Jetstream**, etc.
+- Las tres líneas correspondientes a **Alpine** se podrían borrar sin problemas para este ejemplo, sin embargo, no permite cargar información en {{ $slot }} de una vista de laravel-breeze (con blade). En conlusión, no borre estas líneas.  
+
 ```Javascript
 import './bootstrap';
 
 import Alpine from 'alpinejs';
-
 window.Alpine = Alpine;
-
 Alpine.start();
 
 // 💡INICIA BLOQUE AGREGADO
