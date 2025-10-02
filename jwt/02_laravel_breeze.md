@@ -141,16 +141,15 @@ export default router
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-const tk = ref('')
+const token = ref('')
 const users = ref([])
 onMounted(() => {
-  getToken()
+  getToken() // Cuando la aplicación Vue3 carga, automáticamente solicita el token (se obtiene de la cookie token)
 })
 const getToken = async () => {
   try {
-    const response = await axios.get("/api/gettoken");
-    tk.value = response.data.trim()
-    console.log("tk=" + tk.value)
+    const response = await axios.get("/api/gettoken"); // Obtiene el token que será utilizado posteriormente en cada petición de una ruta protegida.
+    token.value = response.data.trim() // Quita espacios en blanco de los extremos del token porque un espacio en blanco altera su contenido.
   } catch (err) {
     console.error(err);
   }
@@ -159,7 +158,7 @@ const getUsers = async () => {
   try {
     const response = await axios.get("/api/users",{
             headers: {
-                Authorization: `Bearer ${tk.value}`
+                Authorization: `Bearer ${token.value}` // Envía el token a la ruta API.
             }
     });
     users.value = response.data
