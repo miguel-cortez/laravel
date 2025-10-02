@@ -58,7 +58,7 @@ const router = createRouter({
 
 export default router
 ```
-## 5. Agregue el archivo resources/components/App.vue
+## 5. Agregue el archivo resources/components/js/App.vue
 ```Javascript
 <template>
   <h1>Hello App!</h1>
@@ -113,7 +113,7 @@ const getUsers = async () => {
 </script>
 ```
 
-## 6. Agregue el archivo resources/components/HomeView.vue
+## 6. Agregue el archivo resources/components/js/HomeView.vue
 ```Javascript
 <script>
 export default {
@@ -131,7 +131,7 @@ export default {
 </template>
 ```
 
-## 6. Agregue el archivo resources/components/AboutView.vue
+## 6. Agregue el archivo resources/components/js/AboutView.vue
 ```
 <script setup>
 import { computed } from 'vue'
