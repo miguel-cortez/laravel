@@ -58,7 +58,65 @@ const router = createRouter({
 
 export default router
 ```
+## 5. Agregue el archivo resources/components/App.vue
+```Javascript
+<template>
+  <h1>Hello App!</h1>
+  <p><strong>Current route path:</strong>{{ $route.fullPath }} </p>
+  <nav>
+    <RouterLink to="/" class="color:purple">Go to Home</RouterLink>
+    <RouterLink to="/about">Go to About</RouterLink>
+  </nav>
+  <main>
+    <RouterView />
+  </main>
+</template>
+```
 
+## 6. Agregue el archivo resources/components/HomeView.vue
+```Javascript
+<script>
+export default {
+  methods: {
+    goToAbout() {
+      this.$router.push('/about')
+    },
+  },
+}
+</script>
+
+<template>
+  <h2>HomeView</h2>
+  <button @click="goToAbout">Go to About</button>
+</template>
+```
+
+## 6. Agregue el archivo resources/components/AboutView.vue
+```
+<script setup>
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
+
+const search = computed({
+  get() {
+    return route.query.search ?? ''
+  },
+  set(search) {
+    router.replace({ query: { search } })
+  }
+})
+</script>
+
+<template>
+  <h2>AboutView</h2>
+  <label>
+    Search: <input v-model.trim="search" maxlength="20">
+  </label>
+</template>
+```
 ## Para que no encripte
 
 ```
