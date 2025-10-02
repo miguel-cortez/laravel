@@ -94,7 +94,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator; // 💡LÍNEA AGREGADA
+use Illuminate\Support\Facades\Validator; // LINEA AGREGADA
+use Illuminate\Support\Facades\Hash; // LINEA AGREGADA
+use App\Models\User; // LINEA AGREGADA
+use Tymon\JWTAuth\Facades\JWTAuth; // LINEA AGREGADA
+use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     // AQUÍ AGREGUE LAS FUNCIONES
