@@ -1,17 +1,62 @@
 # JWT y Laravel-Breeze
-
+## Contexto
 🚀 **Objetivo** Se pretende utilizar el paquete **laravel-breeze** para la creación y administración de cuentas de usuario y el paquete **tymon/jwt-auth** para la protección de rutas API.
 
 <img width="1510" height="592" alt="imagen" src="https://github.com/user-attachments/assets/6971a6a7-344d-4f3e-ba94-fafe792051db" />
 
-🎆 **Requisito** Haber desarrollado la práctica [Protección de rutas API con JWT](https://github.com/miguel-cortez/laravel/blob/master/jwt/01_guia.md)  
+✴️ **Requisito** Haber desarrollado la práctica [Protección de rutas API con JWT](https://github.com/miguel-cortez/laravel/blob/master/jwt/01_guia.md)  
 
-## 1. Instale el paquete laravel-breeze
+## 1. Instale Laravel Breeze
+- Agregue el paquete de **Laravel Breeze** como dependencia en **composer.json**
 
-Ejecute los pasos del **1** al **5** de la guía [LARAVEL/BREEZE](https://github.com/miguel-cortez/laravel/blob/master/proyecto_laravel_12/03_laravel_breeze.md)  
+```
+composer require laravel/breeze
+```
+- Instale el paquete de **Laravel Breeze**
+```
+php artisan breeze:install
+```
+- Instale las dependencias listadas en **package.json**
+```
+npm install
+```
+- Compile los archivos **css** y **js** para desarrollo
+```
+npm run dev
+```
+- Ejecute las migraciones
+```
+php artisan migrate
+```
+- Pruebe la aplicación
+```
+php artisan serve
+```
 
 ## 2. Configure Vue3
-Ejecute los pasos **1** y **2** de la guía [CONFIGURACIÓN DE VUE3](https://github.com/miguel-cortez/laravel/blob/master/proyecto_laravel_12/04_vue3.md)  
+
+### Instale los paquetes
+```
+npm install vue@latest vue-router@latest @vitejs/plugin-vue
+```
+
+### Configure vite.config.js
+
+```
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue'; // 💡Línea agregada
+import laravel from 'laravel-vite-plugin';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            refresh: true,
+        }),
+        vue(), // 💡 Línea agregada
+    ],
+});
+```
 
 ## 3. Modifique el archivo resources/js/app.js
 
