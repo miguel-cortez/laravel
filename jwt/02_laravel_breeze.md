@@ -15,15 +15,6 @@ Ejecute los pasos **1** y **2** de la guía [CONFIGURACIÓN DE VUE3](https://git
 
 ## 3. Modifique el archivo resources/js/app.js
 
-📖 ***Notas***.  
-- El archivo **app.js** importa el archivo **bootstrap.js** y también importa **alpinejs** que se encuentra en **node_modules/alpinejs/**. Se puede instalar con **npm install alpinejs** o ya viene instalado con algún paquete como **laravel-breeze**, **Laravel Jetstream**, etc.
-- Las tres líneas correspondientes a **Alpine** se podrían borrar sin problemas para este ejemplo, sin embargo, no permite cargar información en {{ $slot }} de una vista de laravel-breeze (con blade). En conlusión, no borre estas líneas.
-- El bloque de código agregado, crea la aplicación de **Vue3**, configura **axios**, agrega las **rutas** para componentes de **vue-router** y lanza la aplicación de **Vue3**  
-
-<img width="1379" height="306" alt="imagen" src="https://github.com/user-attachments/assets/11b0ca60-6bc6-4a1e-8540-ef1e999b6e5d" />
-
-
-
 ```Javascript
 import './bootstrap';
 
@@ -48,7 +39,16 @@ app.mount('#app')
 // 💡FINALIZA BLOQUE AGREGADO
 ```
 
+📖 ***Comentarios (🔅Los comentarios no son parte del proceso, no haga nada con ellos. Solo son explicaciones)***.  
+- El archivo **app.js** importa el archivo **bootstrap.js** y también importa **alpinejs** que se encuentra en **node_modules/alpinejs/**. Se puede instalar con **npm install alpinejs** o ya viene instalado con algún paquete como **laravel-breeze**, **Laravel Jetstream**, etc.
+- Las tres líneas correspondientes a **Alpine** se podrían borrar sin problemas para este ejemplo, sin embargo, no permite cargar información con **{{ $slot }}** presente en el archivo **resources/views/layouts/app.blade.php**
+  <img width="1053" height="312" alt="imagen" src="https://github.com/user-attachments/assets/e102750d-8174-4a65-9687-9a23b7b8ba01" />
+- El bloque de código agregado, crea la aplicación de **Vue3**, configura **axios**, agrega las **rutas** para componentes de **vue-router** y lanza la aplicación de **Vue3**  
+
 ## 4. Agregue el archivo resources/js/router.js
+
+⚡Aquí se definen las rutas a las cuales tendrá acceso (podrá utilizar) la aplicación de **Vue3**.  
+
 ```Javascript
 import { createMemoryHistory, createRouter } from 'vue-router'
 
@@ -68,6 +68,9 @@ const router = createRouter({
 export default router
 ```
 ## 5. Agregue el archivo resources/js/components/App.vue
+
+⚡Este es el componente principal de la aplicación de **Vue3**  
+
 ```Javascript
 <template>
   <h1>Hello App!</h1>
@@ -123,6 +126,9 @@ const getUsers = async () => {
 ```
 
 ## 6. Agregue el archivo resources/js/components/HomeView.vue
+
+⚡Esta vista no es relevante para el ejemplo.  
+
 ```Javascript
 <script>
 export default {
@@ -141,6 +147,9 @@ export default {
 ```
 
 ## 6. Agregue el archivo resources/js/components/AboutView.vue
+
+⚡Esta vista no es relevante para el ejemplo.  
+
 ```
 <script setup>
 import { computed } from 'vue'
@@ -180,13 +189,19 @@ const search = computed({
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
-                <div id="app"></div> // 💡LÍNEA AGREGADA
+                {{ $slot }}  // 👈 ESTE ES ELEMENTO DEL CUAL ARRIBA COMENTÉ (DONDE SE CARGA POR EJEMPLO EL PERFIL DEL USUARIO).
+                <div id="app"></div> // 💡LÍNEA AGREGADA PARA CARGAR LA APLICACION DE VUE3
             </main>
         </div>
     </body>
 </html>
 ```
+
+📚 **Nota**. Si borra la línea **{{ $slot }}** no se comportará de forma normal el menú del usuario autenticado
+
+<img width="1070" height="614" alt="imagen" src="https://github.com/user-attachments/assets/68fb43b8-9ab8-4346-acec-a2c31ae3d5f6" />
+
+
 
 ## 8. Modifique el archivo app/Http/Controllers/Auth/AuthenticatedSessionController.php
 
