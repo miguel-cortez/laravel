@@ -217,6 +217,28 @@ php artisan jetstream:install inertia
 
 <img width="1112" height="502" alt="imagen" src="https://github.com/user-attachments/assets/eba6cc16-92ae-4295-ba90-dd5940ed53bf" />
 
+<pre>
+'Log files:
+C:\Users\macv\AppData\Local\npm-cache\_logs\2025-10-28T21_56_20_308Z-debug-0.log
+
+# npm resolution error report
+
+While resolving: undefined@undefined
+Found: vite@7.1.12
+node_modules/vite
+  dev vite@"^7.0.7" from the root project
+
+Could not resolve dependency:
+peer vite@"^5.0.0 || ^6.0.0" from @vitejs/plugin-vue@5.2.4
+node_modules/@vitejs/plugin-vue
+  dev @vitejs/plugin-vue@"^5.0.0" from the root project
+
+Fix the upstream dependency conflict, or retry
+this command with --force or --legacy-peer-deps
+to accept an incorrect (and potentially broken) dependency resolution.
+</pre>
+
+
 ## Solución
 
 <img width="760" height="138" alt="imagen" src="https://github.com/user-attachments/assets/5cbaab70-41d0-4573-b967-b27f17bbdd7c" />
