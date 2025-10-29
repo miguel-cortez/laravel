@@ -7,25 +7,25 @@ laravel new JetStreamInertia
 ```
 El valor de la pregunta **Which starter kit would you like to install?** por defecto será **None**  
 
-<img width="547" height="381" alt="imagen" src="https://github.com/user-attachments/assets/69b2e510-5515-4e15-afb4-75a5e0225610" />
+><img width="547" height="381" alt="imagen" src="https://github.com/user-attachments/assets/69b2e510-5515-4e15-afb4-75a5e0225610" />
 
 El valor de la pregunta **Which testing framework do you prefer?** por defecto será **Pest**  
 
-<img width="435" height="106" alt="imagen" src="https://github.com/user-attachments/assets/06eb6ff3-cd10-4cb8-85b6-8b1daa4d8bf8" />
+><img width="435" height="106" alt="imagen" src="https://github.com/user-attachments/assets/06eb6ff3-cd10-4cb8-85b6-8b1daa4d8bf8" />
 
 El valor de la pregunta **Do you want to install Laravel Boost to improve AI assisted coding? (yes/no)** por defecto será **yes**  
-<img width="780" height="61" alt="imagen" src="https://github.com/user-attachments/assets/ea0fbad4-cfaa-4950-92ab-7de6e2395779" />
+><img width="780" height="61" alt="imagen" src="https://github.com/user-attachments/assets/ea0fbad4-cfaa-4950-92ab-7de6e2395779" />
 
 El valor predeterminado de la pregunta **Which database will your application use? [SQLite]** será **SQLite** pero yo lo cambié a **mysql**  
 
- <img width="477" height="140" alt="imagen" src="https://github.com/user-attachments/assets/be8bfe51-2026-4b49-a8c6-fe3f3c51c34b" />
+ ><img width="477" height="140" alt="imagen" src="https://github.com/user-attachments/assets/be8bfe51-2026-4b49-a8c6-fe3f3c51c34b" />
 
 No ejecuté las migraciones por defecto para poder cambiar el nombre de la base de datos en el archivo **.env**   
-<img width="897" height="58" alt="imagen" src="https://github.com/user-attachments/assets/f871035b-3cbb-4ab4-923c-f3eabf618430" />
+><img width="897" height="58" alt="imagen" src="https://github.com/user-attachments/assets/f871035b-3cbb-4ab4-923c-f3eabf618430" />
 
 No ejecuté los comandos **npm instal** y **npm run build** porque prefiero entrar a la carpeta del nuevo proyecto y ejecutar desde allí los comandos.  
 
-<img width="637" height="50" alt="imagen" src="https://github.com/user-attachments/assets/8bfe5ad8-238b-447d-988e-8ae92cf2b8e3" />
+><img width="637" height="50" alt="imagen" src="https://github.com/user-attachments/assets/8bfe5ad8-238b-447d-988e-8ae92cf2b8e3" />
 
 ## Paso 2. Ingrese a la carpeta del proyecto
 
@@ -52,9 +52,9 @@ php artisan migrate
 ```
 
 En la siguiente pregunta, solo presiones ENTER, por defecto creará la base de datos.  
-<img width="784" height="205" alt="imagen" src="https://github.com/user-attachments/assets/98a19c18-00a1-4598-bd23-c0743d84b48a" />
+><img width="784" height="205" alt="imagen" src="https://github.com/user-attachments/assets/98a19c18-00a1-4598-bd23-c0743d84b48a" />
 
-<img width="1106" height="617" alt="imagen" src="https://github.com/user-attachments/assets/6ec8ada5-e919-462e-85a4-5eb6e6bd1ce7" />
+><img width="1106" height="617" alt="imagen" src="https://github.com/user-attachments/assets/6ec8ada5-e919-462e-85a4-5eb6e6bd1ce7" />
 
 Modifique el archivo **app/Providers/AppServiceProvider.php** 
 
@@ -86,11 +86,103 @@ class AppServiceProvider extends ServiceProvider
 ```
 Borre la base de datos y ejecute nuevamente las migraciones con `php artisan migrate`  
 
-<img width="237" height="311" alt="imagen" src="https://github.com/user-attachments/assets/d0695c56-adb8-4f63-9f1d-a56099c7e95a" />
+><img width="237" height="311" alt="imagen" src="https://github.com/user-attachments/assets/d0695c56-adb8-4f63-9f1d-a56099c7e95a" />
 
 ```
 drop database jetstreaminertia
 ```
 
-<img width="1097" height="443" alt="imagen" src="https://github.com/user-attachments/assets/64c23b35-d921-4886-9aeb-6a05266fdf91" />
+><img width="1097" height="443" alt="imagen" src="https://github.com/user-attachments/assets/64c23b35-d921-4886-9aeb-6a05266fdf91" />
+
+
+## Paso 4. Instala dependencias y compila la aplicación
+
+```
+npm install && npm run build
+```
+
+<img width="699" height="464" alt="imagen" src="https://github.com/user-attachments/assets/41629a85-6ebd-4685-9236-7a8b338a21ea" />
+
+## Paso 5. Ejecuta la aplicación
+
+```
+npm run dev
+php artisan serve
+```
+
+<img width="950" height="431" alt="imagen" src="https://github.com/user-attachments/assets/30e40930-ca1a-45e4-af5f-a60015b10ebd" />
+
+## Paso 6. Instalar JetStream
+
+```
+composer require laravel/jetstream
+```
+
+<img width="1096" height="723" alt="imagen" src="https://github.com/user-attachments/assets/d84eb5ab-ff85-4697-9684-b10a66989781" />
+
+```
+php artisan jetstream:install
+```
+
+Selecciona la opción **inertia**  
+
+<img width="1108" height="205" alt="imagen" src="https://github.com/user-attachments/assets/6de2aa29-daeb-4e0d-84af-a52bd1f99fc3" />
+
+Presiona ENTER (opcionalmente se puede utilizar otra característica)  
+
+<img width="1095" height="173" alt="imagen" src="https://github.com/user-attachments/assets/4a9479e7-4bb3-4b2b-9b64-3326b6ce36a7" />
+
+Presiona ENTER (Por defecto se usará **Pest** para realizar pruebas unitarias  
+
+<img width="1096" height="88" alt="imagen" src="https://github.com/user-attachments/assets/cd7815ad-cb20-456e-b16b-d3646863e91c" />
+
+Ocurrió un error:  
+
+<img width="1107" height="662" alt="imagen" src="https://github.com/user-attachments/assets/ea8bfb9a-9db8-4943-adb4-21b885fa76cd" />
+
+No realizarán nuevamente las migraciones en este momenento.  
+
+<img width="1303" height="481" alt="imagen" src="https://github.com/user-attachments/assets/ac57d1a1-a8ec-428f-b3fa-30300dfb4edd" />
+
+Comentarios acerca del error: 
+
+<img width="760" height="138" alt="506810820-5cbaab70-41d0-4573-b967-b27f17bbdd7c" src="https://github.com/user-attachments/assets/f569fe99-1aa5-4817-9b91-39ad920f6535" />
+
+<pre>
+'Log files:
+C:\Users\macv\AppData\Local\npm-cache\_logs\2025-10-28T16_27_24_885Z-debug-0.log
+
+# npm resolution error report
+
+While resolving: undefined@undefined
+Found: vite@7.1.12
+node_modules/vite
+  dev vite@"^7.0.7" from the root project
+
+Could not resolve dependency:
+peer vite@"^5.0.0 || ^6.0.0" from @vitejs/plugin-vue@5.2.4
+node_modules/@vitejs/plugin-vue
+  dev @vitejs/plugin-vue@"^5.0.0" from the root project
+
+Fix the upstream dependency conflict, or retry
+this command with --force or --legacy-peer-deps
+to accept an incorrect (and potentially broken) dependency resolution.
+</pre>
+
+**Solución**  
+
+```
+npm install @vitejs/plugin-vue@^6.0.0 --save-dev
+```
+
+<img width="778" height="279" alt="imagen" src="https://github.com/user-attachments/assets/76e00649-c717-4359-a380-8e9930923992" />
+
+Listo  
+
+<img width="863" height="1017" alt="imagen" src="https://github.com/user-attachments/assets/a0101ba1-dd29-4260-b769-ca6c48993f8a" />
+
+
+
+
+
 
