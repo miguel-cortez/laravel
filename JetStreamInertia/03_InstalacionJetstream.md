@@ -1,6 +1,11 @@
 # Instalación de Jetstream
+## Paso 1. Ingresa al directorio del proyecto
 
-## Paso 7. Instala JetStream
+```
+cd JetstreamInertia
+```
+
+## Paso 2. Instala JetStream
 
 Instala el paquete JetStream en el proyecto:  
 
@@ -72,26 +77,29 @@ npm install && npm run build
 <img width="863" height="1017" alt="imagen" src="https://github.com/user-attachments/assets/a0101ba1-dd29-4260-b769-ca6c48993f8a" />
 <br /><br />
 
-## Paso 8. Prueba la aplicación
+## Paso 3. Prueba la aplicación
 
 ```bash
 npm run dev
 php artisan serve
 ```
 
-Pantalla principal  
+**Pantalla principal** Ahora ya dispone de los botones **Log in** y **Register** que son parte de **Jetstream**.  
+
 <img width="1872" height="981" alt="imagen" src="https://github.com/user-attachments/assets/6adb41f8-e67c-4aaf-aa2f-777a861eeb52" />
 <br /><br />
 
-Registro de usuarios  
+**Register** Este es el formulario para craer nuevos usuarios utilizando **Jetstream**  
 
 <img width="731" height="720" alt="imagen" src="https://github.com/user-attachments/assets/36de346e-14ec-4873-8bba-b8414759047a" />
 <br /><br />
 
-Autenticación de usuarios  
+**Log in** Este es el formulario para autenticación mediante **Jetstream**  
 
 <img width="734" height="651" alt="imagen" src="https://github.com/user-attachments/assets/33b40a18-0fdb-4928-b1e6-c9c0645622b1" />
 <br /><br />
+
+**Dashboard** Panel administrativo creado con **Jetstream**  
 
 <img width="1470" height="885" alt="imagen" src="https://github.com/user-attachments/assets/d22e61f4-f2ec-45aa-ab05-01b392dae88a" />
 <br /><br />
