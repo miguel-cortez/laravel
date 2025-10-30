@@ -19,7 +19,7 @@ En frontend (por ejemplo **resources/js/Pages/Dashboard.vue**):
 </template>
 ```
 
-📚 **Nota** Esto renderiza el componente Dashboard.vue cuando visitas /dashboard.
+📚 **Nota** Esto renderiza el componente `Dashboard.vue` cuando visitas `/dashboard`.
 
 ## Ejemplo 2. Pasando datos desde Laravel a Vue
 
@@ -56,7 +56,7 @@ defineProps({ user: Object, notifications: Object })
 
 ## Ejemplo 3. Usando un controlador de Laravel
 
-***Definiendo la ruta****  
+***Definiendo la ruta***  
 
 ```php
 use App\Http\Controllers\UserController;
@@ -96,5 +96,63 @@ En frontend **resources/js/Pages/Users/Index.vue**
 defineProps({ users: Array })
 </script>
 ```
-📚**Nota** Cada vez que entres a /users, Laravel renderiza ese componente y le pasa los datos de los usuarios  
+📚**Nota** Cada vez que entres a `/users`, Laravel renderiza ese componente y le pasa los datos de los usuarios  
+
+## Ejemplo 4. Envío de formularios (POST)
+
+```php
+use Illuminate\Http\Request;
+
+Route::post('/users', function (Request $request) {
+    $request->validate(['name' => 'required']);
+    // Crear usuario, por ejemplo
+    return redirect()->back();
+});
+```
+
+Componente **Users/Create.vue**  
+
+```vue
+<template>
+  <form @submit.prevent="submit">
+    <input v-model="form.name" placeholder="Nombre">
+    <button type="submit">Guardar</button>
+  </form>
+</template>
+
+<script setup>
+import { useForm } from '@inertiajs/vue3'
+
+const form = useForm({ name: '' })
+
+function submit() {
+  form.post('/users')
+}
+</script>
+```
+📚 **Nota** El helper `useForm` de Inertia se encarga de enviar la petición al backend, manejar errores y recargar los datos.
+
+## Ejemplo 5. Ruta con parámetros
+
+```php
+Route::get('/users/{user}', function (App\Models\User $user) {
+    return Inertia::render('Users/Show', [
+        'user' => $user,
+    ]);
+});
+```
+
+En frontend **resources/js/Pages/Users/Show.vue**  
+
+```
+<template>
+  <h1>Detalles de {{ user.name }}</h1>
+</template>
+
+<script setup>
+defineProps({ user: Object })
+</script>
+```
+
+📚 **Nota** Así puedes mostrar información dinámica según el usuario de la URL.  
 
