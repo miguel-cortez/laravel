@@ -142,9 +142,9 @@ Esto significa que:
 
 Por tal motivo:  
 
-ℹ️ No necesitas CORS, porque no hay comunicación entre dominios distintos.  
-ℹ️ No necesitas tokens JWT ni API keys, porque Laravel usa su mismo sistema de sesiones PHP y cookies.  
-ℹ️ El estado del usuario (autenticado, roles, etc.) se mantiene automáticamente gracias a la sesión.  
+ℹ️ **No necesitas CORS**, porque no hay comunicación entre dominios distintos.  
+ℹ️ **No necesitas tokens JWT ni API keys**, porque Laravel usa su mismo sistema de **sesiones PHP y cookies**.  
+ℹ️ **El estado del usuario (autenticado, roles, etc.)** se mantiene automáticamente gracias a la sesión.  
 
 ## Páginas oficiales
 https://jetstream.laravel.com/introduction.html  
