@@ -156,3 +156,27 @@ defineProps({ user: Object })
 
 📚 **Nota** Así puedes mostrar información dinámica según el usuario de la URL.  
 
+## Resumen
+
+<table>
+    <tr>
+        <th>Tradicional</th>
+        <th>Inertia</th>
+    </tr>
+    <tr>
+        <td>return view('dashboard', [...])</td>
+        <td>return Inertia::render('Dashboard', [...])</td>
+    </tr>
+    <tr>
+        <td>Usa Blade</td>
+        <td>Usa Vue o React</td>
+    </tr>
+    <tr>
+        <td>Requiere recarga de página</td>
+        <td>Navegación fluida tipo SPA</td>
+    </tr>
+    <tr>
+        <td>Pasa variables a vistas Blade</td>
+        <td>Pasa "props" a componentes JS</td>
+    </tr>
+</table>
