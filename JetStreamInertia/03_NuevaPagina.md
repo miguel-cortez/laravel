@@ -1,5 +1,10 @@
 # Creación de una nueva página
 
+📚**NOTAS**  
+💠 Cuando se crea un proyecto de **Laravel + Jetstream + Inertia + TailwindCSS**, para que los estilos de **TailwindCSS** se apliquen es necesario crear un componente en **📁 resources/js/Components** y una página en **📁 resources/js/Pages** que utilice al componente como se mostrará más adelante.
+
+💠 Las configuraciones de la aplicación **vue** han sido realizadas de forma automática y son totalmente funcionales; pero debemos agregar nuestros archivos en los lugares predefinidos si no queremos alterar la estructura original del proyecto.  
+
 ## Paso 1. Crea un componente Contador.vue
 
 Crear un nuevo archivo llamado **Contador.vue** en el directorio **📁 resources/js/Components**  
@@ -51,5 +56,3 @@ Route::get('/contador', function () {
     return Inertia::render('Contador', []);
 });
 ```
-
-📚**NOTA** Cuando se ha creado un proyecto de Laravel **Laravel + Jetstream + Inertia + TailwindCSS**, los estilos de **TailwindCSS** se aplican correctamente cuando se crea un componente y luego una página que use dicho componente como se muestra en los 9 y 10. El componente debe está encerrado entre el componente principal **AppLayout**. Estas son configuraciones por defecto.  
