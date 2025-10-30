@@ -1,5 +1,4 @@
-# Proyecto de Laravel con JetStream + Inertia
-
+# Nuevo proyecto de Laravel
 ## Paso 1. Crear un nuevo proyecto.
 
 📚 En este paso se creará un proyecto básico de Laravel.  
