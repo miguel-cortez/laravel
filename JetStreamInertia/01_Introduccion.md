@@ -105,6 +105,47 @@ defineProps({ user: Object })
 </script>
 ```
 
+## SPA clásicas vs SPA con Inertia
+
+### SPA tradicional
+
+Cuando construyes una **SPA tradicional**, normalmente tienes **dos aplicaciones separadas**:
+
+1. **Backend (API)** — por ejemplo, Laravel que devuelve JSON.  
+
+2. **Frontend (SPA)** — por ejemplo, una app Vue o React que consume esa API.
+
+Esto implica que:  
+
+* Están en **dominios distintos** (por ejemplo, **api.midominio.com** y **app.midominio.com**).
+
+* El frontend se comunica por **HTTP con la API** (usando fetch o axios).
+
+* Y como son dominios distintos, necesitas configurar **CORS** (Cross-Origin Resource Sharing).
+
+*  Además, la autenticación se hace por **tokens** o **JWT**, no por sesiones PHP, porque el frontend no comparte las cookies de sesión del backend.
+
+* Tienes que manejar **estado de usuario**, tokens, expiraciones, refrescos, etc.
+
+### SPA con Inertia
+
+Con **Inertia, no existen dos aplicaciones** separadas. Solo hay una **app Laravel**, que incluye también tu código **Vue** o **React** dentro del mismo proyecto.  
+Esto significa que:  
+
+* Laravel sigue siendo el **controlador de rutas** (no una API externa).  
+
+* Las rutas se resuelven con controladores y middlewares normales.  
+
+* El frontend (Vue o React) **vive dentro del mismo dominio y sesión** que Laravel.  
+
+* Las peticiones son **navegaciones internas** (Inertia las envía con `XMLHttpRequest` o `fetch`, pero al mismo dominio).
+
+Por tal motivo:  
+
+ℹ️ No necesitas CORS, porque no hay comunicación entre dominios distintos.  
+ℹ️ No necesitas tokens JWT ni API keys, porque Laravel usa su mismo sistema de sesiones PHP y cookies.  
+ℹ️ El estado del usuario (autenticado, roles, etc.) se mantiene automáticamente gracias a la sesión.  
+
 ## Páginas oficiales
 https://jetstream.laravel.com/introduction.html  
 https://inertiajs.com/  
