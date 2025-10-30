@@ -213,80 +213,17 @@ php artisan serve
 
 Pantalla principal  
 <img width="1872" height="981" alt="imagen" src="https://github.com/user-attachments/assets/6adb41f8-e67c-4aaf-aa2f-777a861eeb52" />
+<br /><br />
 
 Registro de usuarios  
 
 <img width="731" height="720" alt="imagen" src="https://github.com/user-attachments/assets/36de346e-14ec-4873-8bba-b8414759047a" />
+<br /><br />
 
 Autenticación de usuarios  
 
 <img width="734" height="651" alt="imagen" src="https://github.com/user-attachments/assets/33b40a18-0fdb-4928-b1e6-c9c0645622b1" />
+<br /><br />
 
 <img width="1470" height="885" alt="imagen" src="https://github.com/user-attachments/assets/d22e61f4-f2ec-45aa-ab05-01b392dae88a" />
-
-## Paso 9. Crea un componente Contador.vue
-
-Crear un nuevo archivo llamado **Contador.vue** en el directorio **📁 resources/js/Components**  
-
-```
-<script setup>
-import { ref } from 'vue'
-
-const count = ref(0)
-
-function increment() {
-  count.value++
-}
-</script>
-
-<template>
-  <button @click="increment" class="text-sky-400">
-    {{ count }}
-  </button>
-</template>
-```
-## Paso 10. Crea una página Contador.vue
-
-Crear un nuevo archivo llamado **Contador.vue** en el directorio **📁 resources/js/Pages**  
-
-```
-<template>
-  <AppLayout>
-    <Contador />
-  </AppLayout>
-</template>
-
-<script setup>
-import Contador from '@/Components/Contador.vue'
-</script>
-```
-
-## Paso 11. Crea una ruta web
-
-```
-<?php
-
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-
-// ✂️ código omitido
-Route::get('/contador', function () {
-    return Inertia::render('Contador', []);
-});
-```
-
-📚Cuando se ha creado un proyecto de Laravel **Laravel + Jetstream + Inertia + TailwindCSS**, los estilos de **TailwindCSS** se aplican correctamente cuando se crea un componente y luego una página que use dicho componente como se muestra en los 9 y 10. El componente debe está encerrado entre el componente principal **AppLayout**. Estas son configuraciones por defecto.  
-
-## Información adicional.
-
-<img width="544" height="466" alt="imagen" src="https://github.com/user-attachments/assets/88c32d00-3424-4fd6-bf9f-5bfc4cda17ed" />
-
-<img width="786" height="502" alt="imagen" src="https://github.com/user-attachments/assets/edae30e7-b552-4c86-b084-48b1da5df216" />
-
-<img width="890" height="464" alt="imagen" src="https://github.com/user-attachments/assets/b80abfc7-d3ab-437d-afd4-585023d4df54" />
-
-
-
-
-
+<br /><br />
