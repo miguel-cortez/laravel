@@ -1,3 +1,5 @@
+# Proyecto de Laravel con JetStream + Inertia
+
 ## Paso 1. Crear un nuevo proyecto.
 
 📚 En este paso se creará un proyecto básico de Laravel.  
@@ -11,25 +13,30 @@ El valor de la pregunta **Which starter kit would you like to install?** por def
 
 <br /><br />
 
-**Paso 1.2** El valor de la pregunta **Which testing framework do you prefer?** por defecto será **Pest**. Presiona **ENTER**. 
+El valor de la pregunta **Which testing framework do you prefer?** por defecto será **Pest**. Presiona **ENTER**. 
 
 <img width="435" height="106" alt="imagen" src="https://github.com/user-attachments/assets/06eb6ff3-cd10-4cb8-85b6-8b1daa4d8bf8" />
+<br /><br />
 
-* El valor de la pregunta **Do you want to install Laravel Boost to improve AI assisted coding? (yes/no)** por defecto será **yes**. Presiona **ENTER**    
+El valor de la pregunta **Do you want to install Laravel Boost to improve AI assisted coding? (yes/no)** por defecto será **yes**. Presiona **ENTER**    
 
 <img width="780" height="61" alt="imagen" src="https://github.com/user-attachments/assets/ea0fbad4-cfaa-4950-92ab-7de6e2395779" />
+<br /><br />
 
-* El valor predeterminado de la pregunta **Which database will your application use? [SQLite]** será **SQLite**. Cambia el valor a **mysql** y presiona **ENTER**.  
+El valor predeterminado de la pregunta **Which database will your application use? [SQLite]** será **SQLite**. Cambia el valor a **mysql** y presiona **ENTER**.  
 
 <img width="477" height="140" alt="imagen" src="https://github.com/user-attachments/assets/be8bfe51-2026-4b49-a8c6-fe3f3c51c34b" />
+<br /><br />
 
-* Si prefieres, puedes ejecutar las migraciones. Yo no las ejecuté en este punto porque supuse que debía modificar el archivo **.env** (*️⃣ Ver Paso 3).   
+Si prefieres, puedes ejecutar las migraciones. Yo no las ejecuté en este punto porque supuse que debía modificar el archivo **.env** (*️⃣ Ver Paso 3).   
 
 <img width="897" height="58" alt="imagen" src="https://github.com/user-attachments/assets/f871035b-3cbb-4ab4-923c-f3eabf618430" />
+<br /><br />
 
-* Yo no ejecuté los comandos **npm install** y **npm run build** porque considero que es necesario primero ingresar a la carpeta del proyecto.  
+Yo no ejecuté los comandos **npm install** y **npm run build** porque considero que es necesario primero ingresar a la carpeta del proyecto.  
 
 <img width="637" height="50" alt="imagen" src="https://github.com/user-attachments/assets/8bfe5ad8-238b-447d-988e-8ae92cf2b8e3" />
+<br /><br />
 
 ## Paso 2. Ingresa a la carpeta del proyecto
 
@@ -55,15 +62,18 @@ DB_PASSWORD=
 php artisan migrate
 ```
 
-En la siguiente pregunta, solo presiones ENTER, por defecto creará la base de datos.  
+El valor predeterminado para la pregunta **Would you like to create it?** es **yes**, lo cual significa que la base de datos **jetstreaminertia** será creada. Solo presiona **ENTER**   
 <img width="784" height="205" alt="imagen" src="https://github.com/user-attachments/assets/98a19c18-00a1-4598-bd23-c0743d84b48a" />
+<br /><br />
 
-Falló la ejecución de las migraciones.  
+En la siguiente imagen se indica que las migraciones no se ejecutaron con éxito.   
 
 <img width="1106" height="617" alt="imagen" src="https://github.com/user-attachments/assets/6ec8ada5-e919-462e-85a4-5eb6e6bd1ce7" />
+<br /><br />
 
-Para solucionar el problema modifica el archivo **app/Providers/AppServiceProvider.php** 
+Para solventar este problema será necesario modificar el archivo **app/Providers/AppServiceProvider.php**, borrar la base de datos y ejecutar nuevamente las migraciones.  
 
+Contenido del archivo ***app/Providers/AppServiceProvider.php*** modificado:  
 ```php
 <?php
 
@@ -124,73 +134,75 @@ php artisan serve
 
 ## Paso 7. Instala JetStream
 
+Instala el paquete JetStream en el proyecto:  
+
 ```bash
 composer require laravel/jetstream
 ```
 
 <img width="1096" height="723" alt="imagen" src="https://github.com/user-attachments/assets/d84eb5ab-ff85-4697-9684-b10a66989781" />
+<br /><br />
+
+Instala y configura JetStream en la aplicación:  
 
 ```bash
 php artisan jetstream:install
 ```
 
-Selecciona la opción **inertia** y presiona **ENTER**    
+Escribe **inertia** para responder a la pregunta **Which Jetstream stack would you like to install?** y luego presiona **ENTER**  
 
 <img width="1108" height="205" alt="imagen" src="https://github.com/user-attachments/assets/6de2aa29-daeb-4e0d-84af-a52bd1f99fc3" />
+<br /><br />
 
-Presiona ENTER (opcionalmente se puede utilizar otra característica)  
+La pregunta **Would you like any optional features?** tiene el valor predeterminado **None**. Solo presiona **ENTER**  
 
 <img width="1095" height="173" alt="imagen" src="https://github.com/user-attachments/assets/4a9479e7-4bb3-4b2b-9b64-3326b6ce36a7" />
+<br /><br />
 
-Presiona ENTER (Por defecto se usará **Pest** para realizar pruebas unitarias)  
+La pregunta **Which testing framework do you prefer?** tiene el valor predeterminaod **Pest**. Presiona **ENTER**  
 
 <img width="1096" height="88" alt="imagen" src="https://github.com/user-attachments/assets/cd7815ad-cb20-456e-b16b-d3646863e91c" />
+<br /><br />
 
-❗Ocurrió un error:  
+## ❗ERROR 
+
+Responde **no** a la pregunta **Would you like to re-run your migrations?** y luego presiona **ENTER**  
 
 <img width="1107" height="662" alt="imagen" src="https://github.com/user-attachments/assets/ea8bfb9a-9db8-4943-adb4-21b885fa76cd" />
+<br /><br />
 
-No realizarán nuevamente las migraciones en este momenento.  
+🔖**NOTA** El proceso finaliza pero el proyecto queda con errores de configuración.
+
+A fin de hacer pruebas, yo ejecuté el comando **npm install** y mostró la siguiente información:  
 
 <img width="1303" height="481" alt="imagen" src="https://github.com/user-attachments/assets/ac57d1a1-a8ec-428f-b3fa-30300dfb4edd" />
+<br /><br />
 
-Comentarios acerca del error: 
+***🔎 Investigando la causa del error***  
 
 <img width="760" height="138" alt="506810820-5cbaab70-41d0-4573-b967-b27f17bbdd7c" src="https://github.com/user-attachments/assets/f569fe99-1aa5-4817-9b91-39ad920f6535" />
+<br /><br />
 
-<pre>
-'Log files:
-C:\Users\macv\AppData\Local\npm-cache\_logs\2025-10-28T16_27_24_885Z-debug-0.log
 
-# npm resolution error report
+**🔑 SOLUCIÓN**  
 
-While resolving: undefined@undefined
-Found: vite@7.1.12
-node_modules/vite
-  dev vite@"^7.0.7" from the root project
-
-Could not resolve dependency:
-peer vite@"^5.0.0 || ^6.0.0" from @vitejs/plugin-vue@5.2.4
-node_modules/@vitejs/plugin-vue
-  dev @vitejs/plugin-vue@"^5.0.0" from the root project
-
-Fix the upstream dependency conflict, or retry
-this command with --force or --legacy-peer-deps
-to accept an incorrect (and potentially broken) dependency resolution.
-</pre>
-
-**Solución**  
+La solución es instalar un paquete de **plugin-vue** compatible con **Vite 7.1.2**  
 
 ```bash
 npm install @vitejs/plugin-vue@^6.0.0 --save-dev
 ```
 
 <img width="778" height="279" alt="imagen" src="https://github.com/user-attachments/assets/76e00649-c717-4359-a380-8e9930923992" />
+<br /><br />
 
-Listo  
+Comando para verificar que la solución es correcta:  
+```
+npm install && npm run build
+```
+
 
 <img width="863" height="1017" alt="imagen" src="https://github.com/user-attachments/assets/a0101ba1-dd29-4260-b769-ca6c48993f8a" />
-
+<br /><br />
 
 ## Paso 8. Prueba la aplicación
 
