@@ -5,25 +5,27 @@
 ```bash
 laravel new JetStreamInertia
 ```
-El valor de la pregunta **Which starter kit would you like to install?** por defecto será **None**  
+El valor de la pregunta **Which starter kit would you like to install?** por defecto será **None**. Solo presiona **ENTER**.  
 
 <img width="547" height="381" alt="imagen" src="https://github.com/user-attachments/assets/69b2e510-5515-4e15-afb4-75a5e0225610" />
 
-El valor de la pregunta **Which testing framework do you prefer?** por defecto será **Pest**  
+El valor de la pregunta **Which testing framework do you prefer?** por defecto será **Pest**. Presiona **ENTER**. 
 
 <img width="435" height="106" alt="imagen" src="https://github.com/user-attachments/assets/06eb6ff3-cd10-4cb8-85b6-8b1daa4d8bf8" />
 
-El valor de la pregunta **Do you want to install Laravel Boost to improve AI assisted coding? (yes/no)** por defecto será **yes**  
+El valor de la pregunta **Do you want to install Laravel Boost to improve AI assisted coding? (yes/no)** por defecto será **yes**. Presiona **ENTER**    
+
 <img width="780" height="61" alt="imagen" src="https://github.com/user-attachments/assets/ea0fbad4-cfaa-4950-92ab-7de6e2395779" />
 
-El valor predeterminado de la pregunta **Which database will your application use? [SQLite]** será **SQLite** pero yo lo cambié a **mysql**  
+El valor predeterminado de la pregunta **Which database will your application use? [SQLite]** será **SQLite**. Cambia el valor a **mysql** y presiona **ENTER**.  
 
 <img width="477" height="140" alt="imagen" src="https://github.com/user-attachments/assets/be8bfe51-2026-4b49-a8c6-fe3f3c51c34b" />
 
-No ejecuté las migraciones por defecto para poder cambiar el nombre de la base de datos en el archivo **.env**   
+Si prefieres, puedes ejecutar las migraciones. Yo no las ejecuté en este punto porque supuse que debía modificar el archivo **.env**    
+
 <img width="897" height="58" alt="imagen" src="https://github.com/user-attachments/assets/f871035b-3cbb-4ab4-923c-f3eabf618430" />
 
-No ejecuté los comandos **npm install** y **npm run build** porque prefiero entrar a la carpeta del nuevo proyecto y ejecutar desde allí los comandos.  
+Yo no ejecuté los comandos **npm install** y **npm run build** porque considero que es necesario primero ingresar a la carpeta del proyecto.  
 
 <img width="637" height="50" alt="imagen" src="https://github.com/user-attachments/assets/8bfe5ad8-238b-447d-988e-8ae92cf2b8e3" />
 
@@ -33,7 +35,7 @@ No ejecuté los comandos **npm install** y **npm run build** porque prefiero ent
 cd JetStreamInertia
 ```
 
-## Paso 2. Modificar el archivo .env
+## Paso 3. Modifica el archivo .env
 
 📚Este proceso se realizará en Visual Studio Code. Pero cuando abrir el proyecto, ya estaban las configuraciones, se debe a las opciones elegidas previamente mientras se creaba el proyecto.  
 
@@ -45,7 +47,7 @@ DB_DATABASE=jetstreaminertia
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-## Paso 3. Ejecute las migraciones
+## Paso 4. Ejecuta las migraciones
 
 ```bash
 php artisan migrate
@@ -101,7 +103,7 @@ Ejecuta nuevamente las migraciones.
 <img width="1097" height="443" alt="imagen" src="https://github.com/user-attachments/assets/64c23b35-d921-4886-9aeb-6a05266fdf91" />
 
 
-## Paso 4. Instala dependencias y compila la aplicación
+## Paso 5. Instala dependencias y compila la aplicación
 
 ```
 npm install && npm run build
@@ -109,7 +111,7 @@ npm install && npm run build
 
 <img width="699" height="464" alt="imagen" src="https://github.com/user-attachments/assets/41629a85-6ebd-4685-9236-7a8b338a21ea" />
 
-## Paso 5. Ejecuta la aplicación
+## Paso 6. Ejecuta la aplicación
 
 ```bash
 npm run dev
@@ -118,7 +120,7 @@ php artisan serve
 
 <img width="950" height="431" alt="imagen" src="https://github.com/user-attachments/assets/30e40930-ca1a-45e4-af5f-a60015b10ebd" />
 
-## Paso 6. Instalar JetStream
+## Paso 7. Instala JetStream
 
 ```bash
 composer require laravel/jetstream
@@ -188,7 +190,7 @@ Listo
 <img width="863" height="1017" alt="imagen" src="https://github.com/user-attachments/assets/a0101ba1-dd29-4260-b769-ca6c48993f8a" />
 
 
-## Paso 8. Probar la aplicación
+## Paso 8. Prueba la aplicación
 
 ```bash
 npm run dev
@@ -208,7 +210,7 @@ Autenticación de usuarios
 
 <img width="1470" height="885" alt="imagen" src="https://github.com/user-attachments/assets/d22e61f4-f2ec-45aa-ab05-01b392dae88a" />
 
-## Paso 9. Crear un componente Contador.vue
+## Paso 9. Crea un componente Contador.vue
 
 Crear un nuevo archivo llamado **Contador.vue** en el directorio **📁 resources/js/Components**  
 
@@ -229,7 +231,7 @@ function increment() {
   </button>
 </template>
 ```
-## Paso 10. Crear una página Contador.vue
+## Paso 10. Crea una página Contador.vue
 
 Crear un nuevo archivo llamado **Contador.vue** en el directorio **📁 resources/js/Pages**  
 
@@ -245,7 +247,7 @@ import Contador from '@/Components/Contador.vue'
 </script>
 ```
 
-## Paso 11. Crear una ruta para la página de Contador
+## Paso 11. Crea una ruta web
 
 ```
 <?php
