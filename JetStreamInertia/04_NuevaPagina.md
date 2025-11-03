@@ -17,7 +17,7 @@
 
 Crear un nuevo archivo llamado **Contador.vue** en el directorio **📁 resources/js/Components**  
 
-```
+```vue
 <script setup>
 import { ref } from 'vue'
 
@@ -62,7 +62,7 @@ defineProps({
 
 Crear un nuevo archivo llamado **Contador.vue** en el directorio **📁 resources/js/Pages**  
 
-```
+```vue
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Contador from '@/Components/Contador.vue'
@@ -96,7 +96,7 @@ defineProps({
 
 ## Paso 3. Agrega una nueva ruta web
 
-```
+```php
 <?php
 
 use Illuminate\Foundation\Application;
